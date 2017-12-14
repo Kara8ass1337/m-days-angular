@@ -1,19 +1,180 @@
 .popup {
-  width: 100%;
-  height: 100vh;
-  background: red;
   opacity: 0;
   position: absolute;
+  z-index: 10;
+  width: 100%;
+  height: 100vh;
   top: -200vh;
   bottom: 0;
   right: 0;
   left: 0;
   margin: auto;
-  z-index: 10;
+  overflow: auto;
+  padding-bottom: 25px;
+  padding-top: 100px;
+  font-family: ProximaNovaAltCondensedThin;
+  font-weight: lighter;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.95);
   transition: all ease 0.3s 0s;
 
   &.active {
     top: 0;
     opacity: 1;
   }
+}
+
+.menuWrapper {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.menuLogo {
+  width: 150px;
+  height: 150px;
+  line-height: 150px;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.menuMonochromeDaysTitle {
+  text-align: center;
+  margin: 0 auto;
+  font-size: 48px;
+  margin-bottom: 30px;
+}
+
+.menuDiv {
+  text-align: center;
+  margin: 0 auto;
+  font-size: 24px;
+  margin-top: 30px;
+}
+
+.socButtonWrapper {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.socButton {
+  float: left;
+  margin-right: 25px;
+  width: 32px;
+  height: 42px;
+  overflow: hidden;
+}
+
+.socButtonHr {
+  margin-left: -32px;
+  background: #FFF;
+  height: 6px;
+  width: 32px;
+}
+
+.sendUsForm {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 99999;
+  width: 960px;
+  background: rgba(0, 0, 0, 0.95);
+  padding: 25px;
+  color: #FFF;
+  overflow: hidden;
+  font-family: ProximaNovaAltCondensedThin;
+  font-weight: lighter;
+}
+
+.sendUsFormTitle {
+  font-size: 64px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sendUsInputsWrapper {
+  width: 500px;
+  margin: 0 auto;
+}
+
+.donateTitle {
+  margin: 0 auto;
+  font-size: 24px;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.donate {
+  /*top:0; задаётся в js */
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 99999;
+  width: 960px;
+  overflow: auto;
+  padding-bottom: 25px;
+  padding-top: 100px;
+  color: #FFF;
+  font-family: ProximaNovaAltCondensedThin;
+  font-weight: lighter;
+}
+
+.sendUsForm,
+.donate {
+  display: none;
+}
+
+.goBack {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+.payButtonWrapper {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.payButton {
+  text-align: center;
+  float: left;
+  margin-right: 25px;
+  width: 180px;
+  height: 53px;
+  overflow: hidden;
+  background-color: #FFF;
+  border-radius: 15px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.webmoney:hover {
+  cursor: pointer;
+}
+
+.wmbtn:hover {
+  cursor: pointer;
+}
+
+.qiwi {
+  display: none;
+}
+
+.qiwiClose {
+  width: auto;
+
+}
+
+.payInstruction {
+  margin-right: 25px;
+  color: #FFF;
+  font-family: ProximaNovaAltThin;
+  font-weight: lighter;
+  border: 1px white solid;
+  border-radius: 15px;
+  padding: 5px;
+  float: left;
+  font-size: 24px;
+  display: none;
 }
