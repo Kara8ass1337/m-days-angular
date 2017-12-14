@@ -2,12 +2,12 @@ import {app} from './app.init';
 
 app.config(['$stateProvider', '$urlRouterProvider',
     function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.when('/', '/product');
-    $urlRouterProvider.otherwise('/product');
+    $urlRouterProvider.when('/', '/index');
+    $urlRouterProvider.otherwise('/');
 
-    $stateProvider.state('product', {
-        name: 'product',
-        url: '/product',
-        template: '<product></product>'
+    $stateProvider.state('index', {
+        name: 'index',
+        url: '/index',
+        template: '<index></index>'
     });
 }]);
