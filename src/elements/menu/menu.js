@@ -5,6 +5,10 @@ import {MenuController} from './MenuController';
 
 app.component('menu', {
     template,
+    bindings: {
+        onToggleState: '&',
+        showPopup: '='
+    },
     controller: ['$scope', '$filter', MenuController],
     controllerAs: 'vm'
 });

@@ -1,8 +1,11 @@
 export class MenuController {
     constructor ($scope, $filter) {
         this.isActive = false;
-        this.toggleClass = () => {
-            this.isActive = !this.isActive;
-        }
+        this.showPopup = false;
+    }
+
+    toggleState () {
+        this.isActive = !this.isActive;
+        this.showPopup = this.isActive
     }
 }

@@ -1,9 +1,12 @@
 import {app} from 'common/app/app.init';
-import template from './index.html'
-import './index.scss';
+import template from './popup.html'
+import './popup.styl';
 
-app.component('index', {
+app.component('popup', {
     template,
+    bindings: {
+        showPopup: '<'
+    },
     controller: ['$scope', '$filter', () => {}],
     controllerAs: 'vm'
 });
