@@ -1,0 +1,12 @@
+{
+  "blocks": "always",
+  "brackets": "always",
+  "colons": "always",
+  "semicolons": "always",
+  "sortOrder": "false",
+  "quotePref": false,
+  "prefixVarsWithDollar": "always",
+  "indentPref": {
+    "expect": 2
+  }
+}

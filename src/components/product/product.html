@@ -1,0 +1,18 @@
+<div class="filter">
+    <div class="sort" ng-class="{'is-active': vm.sort.price.active}"
+         data-reverse="{{vm.sort.price.reverse}}" ng-click="vm.orderBy({value: 'price'})">
+        Отсортировать по цене
+    </div>
+    <div class="sort" ng-class="{'is-active': vm.sort.name.active}"
+         data-reverse="{{vm.sort.name.reverse}}" ng-click="vm.orderBy({value: 'name'})">
+        Отсортировать по названию
+    </div>
+</div>
+<br />
+<div class="products-wrapper">
+    <div class="product" ng-repeat="product in vm.data track by $index">
+        <div ng-click="vm.add({index : $index})">
+            {{product.name | capitalize}}: {{product.price | currency: "$"}}
+        </div>
+    </div>
+</div>
