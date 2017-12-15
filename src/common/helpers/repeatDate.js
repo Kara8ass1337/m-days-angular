@@ -13,7 +13,8 @@ export function repeatDate () {
         year = parseInt(date.format('YYYY')),
         hours = parseInt(date.format('HH')),
         minutes = parseInt(date.format('mm')),
-        seconds = parseInt(date.format('ss'));
+        seconds = parseInt(date.format('ss')),
+        milliseconds = parseInt(date.format('SSS'));
 
     const yearStart = moment([year, 0, 1]);
     const daysInYear = moment([year, 11, 31]).diff(yearStart, 'days') + 1;
@@ -30,6 +31,7 @@ export function repeatDate () {
         hours,
         minutes,
         seconds,
+        milliseconds,
         dayCount,
         daysInYear,
         monthText,
