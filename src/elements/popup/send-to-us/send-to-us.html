@@ -2,19 +2,24 @@
     <div class="send-to-us__title">Send us your works</div>
     <form class="send-to-us__form feedback-form"
           enctype="multipart/form-data" action="mail.php" method="post">
-        <label for="nameFF">Name:</label>
-        <input type="text" name="nameFF" id="nameFF" required placeholder="ex: Adam Smith"
-               x-autocompletetype="name" class="w100 border">
-        <label for="contactFF">Email:</label>
-        <input type="email" name="contactFF" id="contactFF" required placeholder="ex: adam@gmail.com"
-               x-autocompletetype="email" class="w100 border">
-        <label for="messageFF">Social link:</label>
-        <input type="text" name="messageFF" id="messageFF" required
-               placeholder="ex: https://instagram.com/m0nochrome_days/" class="w100 border">
-        <label for="fileFF">Choose files:</label>
-        <input type="file" name="fileFF[]" multiple id="fileFF" class="w100">
-        <br>
-        <input value="Send" type="submit" class="submitFF">
+        <div class="send-to-us__form__line">
+            <label for="nameFF">Name:</label>
+            <input type="text" name="nameFF" id="nameFF" required placeholder="ex: Adam Smith" />
+        </div>
+        <div class="send-to-us__form__line">
+            <label for="contactFF">Email:</label>
+            <input type="email" name="contactFF" id="contactFF" required placeholder="ex: adam@gmail.com" />
+        </div>
+        <div class="send-to-us__form__line">
+            <label for="messageFF">Social link:</label>
+            <input type="text" name="messageFF" id="messageFF" required
+                   placeholder="ex: https://instagram.com/m0nochrome_days/" />
+        </div>
+        <div class="send-to-us__form__line">
+            <label for="fileFF">Choose files:</label>
+            <input type="file" name="fileFF[]" multiple id="fileFF" />
+        </div>
+        <input value="Send" type="submit" />
     </form>
     <div class="goBack">
         <a href="#" ng-click="vm.setState('menu')">Go back</a>

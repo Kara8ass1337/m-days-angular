@@ -1,16 +1,9 @@
 .send-to-us {
   display: none;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
-  z-index: 99999;
-  width: 960px;
-  padding: 25px;
-  color: #FFF;
+  width: 100%;
+  color: #fff;
   overflow: hidden;
-  font-family: "ProximaNovaAltCondensedThin";
+  font-family: "ProximaNovaAltThin";
   font-weight: lighter;
 
   &.active {
@@ -26,5 +19,48 @@
   &__form {
     width: 500px;
     margin: 0 auto;
+    padding: 20px;
+    border-radius: 3px;
+    background: #666;
+    margin-top: 30px;
+
+    &__line {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin-top: 15px;
+
+      &:nth-child(1) {
+        margin-top: 0;
+      }
+
+      label {
+        width: 100px;
+        flex-shrink: 0;
+      }
+
+      input {
+        width: 100%;
+        padding: 7px;
+      }
+
+      input[type="file"] {
+        padding: 0;
+      }
+    }
+
+    input[type="submit"] {
+      border: none;
+      border-radius: 3px;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, .2) inset;
+      background: #000;
+      color: #fff;
+      margin-top: 15px;
+      padding: 10px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }
