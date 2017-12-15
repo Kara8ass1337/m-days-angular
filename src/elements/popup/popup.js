@@ -5,7 +5,8 @@ import './popup.styl';
 app.component('popup', {
     template,
     bindings: {
-        showPopup: '<'
+        showPopup: '=',
+        activeElem: '='
     },
     controller: ['$scope', '$filter', () => {}],
     controllerAs: 'vm'

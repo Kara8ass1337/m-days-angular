@@ -1,0 +1,69 @@
+.menu {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  &__logo {
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    text-align: center;
+    margin: 0 auto;
+    font-size: 48px;
+    margin-bottom: 30px;
+  }
+
+  &__item {
+    text-align: center;
+    margin: 0 auto;
+    font-size: 24px;
+    line-height: 1.2;
+    margin-top: 30px;
+  }
+
+  &__soc-btns-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  &__soc-btn {
+    margin-left: 25px;
+    width: 32px;
+    height: 42px;
+    overflow: hidden;
+
+    &:nth-child(1) {
+      margin-left: 0;
+    }
+
+    &:hover {
+      &:after {
+        transform: translateX(0);
+      }
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      transform: translateX(-32px);
+      background: #FFF;
+      height: 3px;
+      width: 100%;
+      transition: transform ease 0.45s 0s;
+    }
+
+    a {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.send-to-us {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 99999;
+  width: 960px;
+  padding: 25px;
+  color: #FFF;
+  overflow: hidden;
+  font-family: "ProximaNovaAltCondensedThin";
+  font-weight: lighter;
+
+  &.active {
+    display: block;
+  }
+
+  &__title {
+    font-size: 64px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  &__form {
+    width: 500px;
+    margin: 0 auto;
+  }
+}

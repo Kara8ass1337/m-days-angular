@@ -7,7 +7,7 @@ app.component('menu', {
     template,
     bindings: {
         onToggleState: '&',
-        showPopup: '='
+        activeElem: '='
     },
     controller: ['$scope', '$filter', MenuController],
     controllerAs: 'vm'
