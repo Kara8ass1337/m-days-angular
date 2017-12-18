@@ -1,4 +1,4 @@
-<div class="donate" ng-class="{'active': vm.activePopupElem.get() == 'donate'}">
+<div class="donate" ng-class="{'active': vm.activePopupElem.get() === 'donate'}">
     <div class="donate__logo">
         <img src="img/logo.png" />
     </div>
@@ -28,14 +28,14 @@
                     </form>
                 </div>
             </div>
-            <div class="pay-item" ng-click="vm.toggleInstruction();">
-                <div class="pay-item__btn qiwi" ng-class="{'inActive': vm.instructionShow == true}"></div>
-                <div class="pay-item__instruction" ng-class="{'active': vm.instructionShow == true}"
+            <div class="pay-item" ng-click="vm.toggleInstructionState();">
+                <div class="pay-item__btn qiwi" ng-class="{'inActive': vm.donateInstructionState.get() === true}"></div>
+                <div class="pay-item__instruction" ng-class="{'active': vm.donateInstructionState.get() === true}"
                      ng-click="$event.stopPropagation();">
                     Go to <a href="https://visa.qiwi.ru/transfer/form.action" target="_blank">link.</a>
                     <br />
                     Input this number: +7 965 422 59 82
-                    <div class="pay-item__instruction__close" title="Close" ng-click="vm.toggleInstruction();">x</div>
+                    <div class="pay-item__instruction__close" title="Close" ng-click="vm.toggleInstructionState();">x</div>
                 </div>
             </div>
             <div class="pay-item">

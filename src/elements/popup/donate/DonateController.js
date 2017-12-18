@@ -1,10 +1,10 @@
 export class DonateController {
-    constructor ($scope, activePopupElem) {
+    constructor ($scope, activePopupElem, donateInstructionState) {
         this.activePopupElem = activePopupElem;
-        this.instructionShow = false;
+        this.donateInstructionState = donateInstructionState;
     }
 
-    toggleInstruction () {
-        this.instructionShow = !this.instructionShow;
+    toggleInstructionState () {
+        this.donateInstructionState.set(!this.donateInstructionState.get());
     }
 }
