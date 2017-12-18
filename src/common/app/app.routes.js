@@ -10,4 +10,10 @@ app.config(['$stateProvider', '$urlRouterProvider',
             url: '/index',
             template: '<index></index>'
         });
+
+        $stateProvider.state('about', {
+            name: 'about',
+            url: '/about',
+            template: '<about></about>'
+        });
     }]);

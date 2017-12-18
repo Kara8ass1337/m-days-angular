@@ -1,7 +1,8 @@
 import {app} from 'common/app/app.init';
-import template from './index.html'
+import template from './about.html'
+import './about.styl'
 
-app.component('index', {
+app.component('about', {
     template,
     controller: ['$scope', () => {}],
     controllerAs: 'vm'
