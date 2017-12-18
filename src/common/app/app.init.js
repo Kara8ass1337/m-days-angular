@@ -28,7 +28,7 @@ app.service('activePopupElem', ['donateInstructionState', function (donateInstru
     this.set = (elem) => {
         this.activePopupElem = elem;
 
-        if (this.activePopupElem !== 'donate' && this.donateInstructionState.get() === true) {
+        if (this.donateInstructionState.get() === true && this.activePopupElem !== 'donate') {
             this.donateInstructionState.set(false);
         }
     };
@@ -45,7 +45,7 @@ app.service('popupActiveState', ['donateInstructionState', function (donateInstr
     this.set = (state) => {
         this.popupActiveState = state;
 
-        if (this.popupActiveState === false && this.donateInstructionState.get() === true) {
+        if (this.donateInstructionState.get() === true && this.popupActiveState === false) {
             this.donateInstructionState.set(false);
         }
     };
