@@ -5,10 +5,6 @@ import {MenuController} from './MenuController';
 
 app.component('menu', {
     template,
-    bindings: {
-        onToggleState: '&',
-        activeElem: '='
-    },
-    controller: ['$scope', '$filter', MenuController],
+    controller: ['$scope', 'changeActivePopupElem', MenuController],
     controllerAs: 'vm'
 });

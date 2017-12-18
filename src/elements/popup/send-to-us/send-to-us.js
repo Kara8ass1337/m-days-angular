@@ -5,10 +5,6 @@ import {SendToUsController} from './sendToUsController';
 
 app.component('sendToUs', {
     template,
-    bindings: {
-        onToggleState: '&',
-        activeElem: '='
-    },
-    controller: ['$scope', '$filter', SendToUsController],
+    controller: ['$scope', 'changeActivePopupElem', SendToUsController],
     controllerAs: 'vm'
 });

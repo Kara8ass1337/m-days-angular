@@ -1,4 +1,4 @@
-.popup__wrapper {
+.popup-wrapper {
   opacity: 0;
   position: absolute;
   z-index: 10;
@@ -27,78 +27,10 @@
 .popup {
   width: 960px;
   margin: 0 auto;
-}
 
-.donate {
-  /*top:0; задаётся в js */
-  left: 0;
-  right: 0;
-  margin: auto;
-  z-index: 99999;
-  width: 960px;
-  overflow: auto;
-  padding-bottom: 25px;
-  padding-top: 100px;
-  color: #FFF;
-  font-family: ProximaNovaAltCondensedThin;
-  font-weight: lighter;
-}
-
-.sendUsForm,
-.donate {
-  display: none;
-}
-
-.goBack {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 24px;
-}
-
-.payButtonWrapper {
-  display: inline-block;
-  margin: 0 auto;
-}
-
-.payButton {
-  text-align: center;
-  float: left;
-  margin-right: 25px;
-  width: 180px;
-  height: 53px;
-  overflow: hidden;
-  background-color: #FFF;
-  border-radius: 15px;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.webmoney:hover {
-  cursor: pointer;
-}
-
-.wmbtn:hover {
-  cursor: pointer;
-}
-
-.qiwi {
-  display: none;
-}
-
-.qiwiClose {
-  width: auto;
-
-}
-
-.payInstruction {
-  margin-right: 25px;
-  color: #FFF;
-  font-family: ProximaNovaAltThin;
-  font-weight: lighter;
-  border: 1px white solid;
-  border-radius: 15px;
-  padding: 5px;
-  float: left;
-  font-size: 24px;
-  display: none;
+  &__go-back {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+  }
 }

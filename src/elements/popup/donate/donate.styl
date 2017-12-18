@@ -1,0 +1,82 @@
+//@import "../menu/menu.styl";
+@import "../menu/menu.styl";
+
+.donate {
+  @extend .menu;
+}
+
+.pay-items-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.pay-item {
+  margin-left: 25px;
+
+  &:nth-child(1) {
+    margin-left: 0;
+  }
+
+  &__btn {
+    width: 180px;
+    height: 53px;
+    overflow: hidden;
+    background-color: #FFF;
+    border-radius: 15px;
+    background: center no-repeat;
+    cursor: pointer;
+
+    &.inActive {
+      display: none;
+    }
+
+    &.paypal {
+      //background-image: url("/img/paypal.png"); bg sets in input type image in html
+
+      input {
+        cursor: pointer;
+      }
+    }
+
+    &.qiwi {
+      background-image: url("/img/qiwi.png");
+    }
+
+    &.webmoney {
+      background: url("/img/webmoney.png");
+    }
+  }
+
+  &__instruction {
+    display: none;
+    position: relative;
+    margin-right: 25px;
+    color: #FFF;
+    font-family: "ProximaNovaAltThin";
+    font-weight: lighter;
+    font-size: 24px;
+    border: 1px white solid;
+    border-radius: 15px;
+    padding: 10px;
+
+    &.active {
+      display: block;
+    }
+
+    &__close {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      width: 28px;
+      height: 28px;
+      transition: opacity ease 0.3s 0s;
+
+      &:hover {
+        opacity: 0.5;
+        cursor: pointer;
+      }
+    }
+  }
+}

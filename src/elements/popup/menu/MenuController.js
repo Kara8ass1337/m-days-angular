@@ -1,9 +1,5 @@
 export class MenuController {
-    constructor () {
-
-    }
-
-    setState (activeElem) {
-        this.activeElem = activeElem;
+    constructor ($scope, changeActivePopupElem) {
+        this.changeActivePopupElem = changeActivePopupElem;
     }
 }

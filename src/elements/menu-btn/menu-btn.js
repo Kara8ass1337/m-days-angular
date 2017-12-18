@@ -6,10 +6,8 @@ import {MenuBtnController} from './MenuBtnController';
 app.component('menuBtn', {
     template,
     bindings: {
-        onToggleState: '&',
-        showPopup: '=',
-        activeElem: '='
+        showPopup: '='
     },
-    controller: ['$scope', '$filter', MenuBtnController],
+    controller: ['$scope', 'changeActivePopupElem', MenuBtnController],
     controllerAs: 'vm'
 });

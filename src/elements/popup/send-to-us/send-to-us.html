@@ -1,4 +1,4 @@
-<div class="send-to-us" ng-class="{'active': vm.activeElem == 'sendToUs'}">
+<div class="send-to-us" ng-class="{'active': vm.changeActivePopupElem.get() == 'sendToUs'}">
     <div class="send-to-us__title">Send us your works</div>
     <form class="send-to-us__form feedback-form"
           enctype="multipart/form-data" action="mail.php" method="post">
@@ -21,7 +21,7 @@
         </div>
         <input value="Send" type="submit" />
     </form>
-    <div class="goBack">
-        <a href="#" ng-click="vm.setState('menu')">Go back</a>
+    <div class="popup__go-back">
+        <a href="#" ng-click="vm.changeActivePopupElem.set('menu')">Go back</a>
     </div>
 </div>

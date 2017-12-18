@@ -6,8 +6,7 @@ app.component('popup', {
     template,
     bindings: {
         showPopup: '=',
-        activeElem: '='
     },
-    controller: ['$scope', '$filter', () => {}],
+    controller: ['$scope', () => {}],
     controllerAs: 'vm'
 });
