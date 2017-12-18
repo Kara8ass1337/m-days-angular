@@ -1,21 +1,21 @@
-<div class="send-to-us" ng-class="{'active': vm.activePopupElem.get() === 'sendToUs'}">
-    <div class="send-to-us__title">Send us your works</div>
-    <form class="send-to-us__form feedback-form"
+<div class="send-us" ng-class="{'active': vm.activePopupElem.get() === 'sendUs'}">
+    <div class="send-us__title">Send us your works</div>
+    <form class="send-us__form feedback-form"
           enctype="multipart/form-data" action="mail.php" method="post">
-        <div class="send-to-us__form__line">
+        <div class="send-us__form__line">
             <label for="nameFF">Name:</label>
             <input type="text" name="nameFF" id="nameFF" required placeholder="ex: Adam Smith" />
         </div>
-        <div class="send-to-us__form__line">
+        <div class="send-us__form__line">
             <label for="contactFF">Email:</label>
             <input type="email" name="contactFF" id="contactFF" required placeholder="ex: adam@gmail.com" />
         </div>
-        <div class="send-to-us__form__line">
+        <div class="send-us__form__line">
             <label for="messageFF">Social link:</label>
             <input type="text" name="messageFF" id="messageFF" required
                    placeholder="ex: https://instagram.com/m0nochrome_days/" />
         </div>
-        <div class="send-to-us__form__line">
+        <div class="send-us__form__line">
             <label for="fileFF">Choose files:</label>
             <input type="file" name="fileFF[]" multiple id="fileFF" />
         </div>
