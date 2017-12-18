@@ -9,7 +9,7 @@ app.run(($rootScope) => {
     $rootScope.activePopupElem = 'menu';
 });
 
-app.service('changeActivePopupElem', function () {
+app.service('activePopupElem', function () {
     this.activePopupElem = 'menu';
     this.set = (elem) => {
         this.activePopupElem = elem;
@@ -17,5 +17,17 @@ app.service('changeActivePopupElem', function () {
 
     this.get = () => {
         return this.activePopupElem;
+    }
+});
+
+app.service('popupActiveState', function () {
+    this.popupActiveState = false;
+
+    this.set = (state) => {
+        this.popupActiveState = state;
+    };
+
+    this.get = () => {
+        return this.popupActiveState;
     }
 });

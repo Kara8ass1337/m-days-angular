@@ -1,4 +1,4 @@
-<div class="donate" ng-class="{'active': vm.changeActivePopupElem.get() == 'donate'}">
+<div class="donate" ng-class="{'active': vm.activePopupElem.get() == 'donate'}">
     <div class="donate__logo">
         <img src="img/logo.png" />
     </div>
@@ -51,6 +51,6 @@
         </div>
     </div>
     <div class="popup__go-back">
-        <a href="#" ng-click="vm.changeActivePopupElem.set('menu')">Go back</a>
+        <a href="#" ng-click="vm.activePopupElem.set('menu')">Go back</a>
     </div>
 </div>

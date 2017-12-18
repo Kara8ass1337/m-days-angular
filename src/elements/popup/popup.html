@@ -1,4 +1,4 @@
-<div class="popup-wrapper" ng-class="{'active': vm.showPopup}">
+<div class="popup-wrapper" ng-class="{'active': vm.popupActiveState.get() == true}">
     <div class="popup">
         <menu></menu>
         <send-to-us></send-to-us>

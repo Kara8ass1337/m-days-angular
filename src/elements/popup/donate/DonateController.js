@@ -1,6 +1,6 @@
 export class DonateController {
-    constructor ($scope, changeActivePopupElem) {
-        this.changeActivePopupElem = changeActivePopupElem;
+    constructor ($scope, activePopupElem) {
+        this.activePopupElem = activePopupElem;
         this.instructionShow = false;
     }
 

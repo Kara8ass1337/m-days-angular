@@ -8,6 +8,6 @@ app.component('menuBtn', {
     bindings: {
         showPopup: '='
     },
-    controller: ['$scope', 'changeActivePopupElem', MenuBtnController],
+    controller: ['$scope', 'activePopupElem', 'popupActiveState', MenuBtnController],
     controllerAs: 'vm'
 });
