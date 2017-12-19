@@ -5,99 +5,99 @@ export class AboutController {
             {
                 href: 'https://vk.com/id16835086',
                 img: '/img/about/aleksandr_kalugin.jpg',
-                name: 'Александр',
-                surname: 'Калугин'
+                name: 'Alexander',
+                surname: 'Kalugin'
             },
             //Антон Ковалевский
             {
                 href: 'https://vk.com/id29768826',
                 img: '/img/about/anton_kovalevsky.jpg',
-                name: 'Антон',
-                surname: 'Ковалевский'
+                name: 'Anton',
+                surname: 'Kovalevsky'
             },
             //Виктория Зырянова
             {
                 href: 'https://vk.com/id14828973',
                 img: '/img/about/victory_zyryanova.jpg',
-                name: 'Виктория',
-                surname: 'Зырянова'
+                name: 'Victoria',
+                surname: 'Zyryanova'
             },
             //Кирилл Непомнящий
             {
                 href: 'https://vk.com/vospalenniy_mozg_djeka',
                 img: '/img/about/kirill_nepomnyachsiy.jpg',
-                name: 'Кирилл',
-                surname: 'Непомнящий'
+                name: 'Kirill',
+                surname: 'Nepomnyashchy'
             },
             //Наталья Бурнашкина
             {
                 href: 'https://vk.com/id744565',
                 img: '/img/about/natalya_burnashkina.jpg',
-                name: 'Наталья',
-                surname: 'Бурнашкина'
+                name: 'Natalia',
+                surname: 'Burnashkina'
             },
             //Слава Сорокин
             {
                 href: 'https://vk.com/tafarayphoto',
                 img: '/img/about/slava_sorokin.jpg',
-                name: 'Слава',
-                surname: 'Сорокин'
+                name: 'Salva',
+                surname: 'Sorokin'
             },
             //Тональ Нагвальевна
             {
                 href: 'https://vk.com/id4462838',
                 img: '/img/about/tonal_nagvalievna.jpg',
-                name: 'Тональ',
-                surname: 'Нагвальевна'
+                name: 'Tonal',
+                surname: 'Nagualevna'
             },
             //Дмитрий Кольдяев
             {
                 href: 'https://vk.com/id8767',
                 img: '/img/about/dmitriy_koldyaev.jpg',
-                name: 'Дмитрий',
-                surname: 'Кольдяев'
+                name: 'Dmitriy',
+                surname: 'Koldyaev'
             },
             //Роман Берёзин
             {
                 href: 'https://vk.com/landschaften',
                 img: '/img/about/roman_berezin.jpg',
-                name: 'Роман',
-                surname: 'Берёзин'
+                name: 'Roman',
+                surname: 'Berezin'
             },
             //Виктория Чешко
             {
                 href: 'https://vk.com/id131625031',
                 img: '/img/about/viktoria_cheshko.jpg',
-                name: 'Виктория',
-                surname: 'Чешко'
+                name: 'Victoria',
+                surname: 'Cheshko'
             },
             //София Головина
             {
                 href: 'https://vk.com/id71689521',
                 img: '/img/about/sofia_golovina.jpg',
-                name: 'София',
-                surname: 'Головина'
+                name: 'Sofia',
+                surname: 'Golovina'
             },
             //Георгий Тверецкий
             {
                 href: 'https://vk.com/id3584626',
                 img: '/img/about/georgiy_tveretskiy.jpg',
-                name: 'Георгий',
-                surname: 'Тверецкий'
+                name: 'George',
+                surname: 'Tvereckiy'
             },
             //Анна Салтыкова
             {
                 href: 'https://vk.com/id188141450',
                 img: '/img/about/anna_saltykova.jpg',
-                name: 'Анна',
-                surname: 'Салтыкова'
+                name: 'Anna',
+                surname: 'Saltykova'
             },
             //Анна Раевская
             {
                 href: 'https://vk.com/id9425559',
                 img: '/img/about/anna_raevskaya.jpg',
-                name: 'Анна',
-                surname: 'Раевская'
+                name: 'Anna',
+                surname: 'Raevskaya'
             },
             //Ksenia Mirklis
             {
@@ -110,29 +110,29 @@ export class AboutController {
             {
                 href: 'http://vk.com/anna_noir',
                 img: '/img/about/anna_korneenkova.jpg',
-                name: 'Анна',
-                surname: 'Корнеенкова'
+                name: 'Annd',
+                surname: 'Korneenkova'
             },
             //Юлия Елизарова
             {
                 href: 'http://vk.com/elizarova_fot',
                 img: '/img/about/juliya_elizarova.jpg',
-                name: 'Юлия',
-                surname: 'Елизарова'
+                name: 'Yuliya',
+                surname: 'Elizarova'
             },
             //Анастасия Дунаева
             {
                 href: 'https://vk.com/id56092039',
                 img: '/img/about/anastasia_dunaeva.jpg',
-                name: 'Анастасия',
-                surname: 'Дунаева'
+                name: 'Anastasia',
+                surname: 'Dunaeva'
             },
             //Надежда Духанова
             {
                 href: 'https://vk.com/id8546188',
                 img: '/img/about/nadezhda_duhanova.jpg',
-                name: 'Надежда',
-                surname: 'Духанова'
+                name: 'Nadezhda',
+                surname: 'Duhanova'
             },
             //Annie Autumn
             {
@@ -145,15 +145,15 @@ export class AboutController {
             {
                 href: 'https://vk.com/awayfromlights',
                 img: '/img/about/katerina_saldaeva.jpg',
-                name: 'Катерина',
-                surname: 'Салдаева'
+                name: 'Katerina',
+                surname: 'Saldaeva'
             },
             //Виктория Майонез
             {
                 href: 'https://vk.com/id10012750',
                 img: '/img/about/viktoria_maiones.jpg',
-                name: 'Виктория',
-                surname: 'Майонез'
+                name: 'Victoria',
+                surname: 'Maionez'
             },
             //Vladimir Deyev
             {
