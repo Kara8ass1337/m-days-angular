@@ -1,4 +1,15 @@
-<div class="menu" ng-class="{'active': vm.activePopupElem.get() === 'menu'}">
+<!-- TEST angular animate -->
+<div ng-init="checked = true">
+    <label>
+        <input type="checkbox" ng-model="checked" />
+        Is visible
+    </label>
+    <div class="content-area sample-show-hide" ng-if="checked">
+        Content...
+    </div>
+</div>
+<!-- END TEST angular animate -->
+<div class="menu" ng-if="vm.activePopupElem.get() === 'menu'">
     <div class="menu__logo">
         <img src="/img/logo.png">
     </div>

@@ -1,4 +1,4 @@
-<div class="send-us" ng-class="{'active': vm.activePopupElem.get() === 'sendUs'}">
+<div class="send-us fade" ng-if="vm.activePopupElem.get() === 'sendUs'">
     <div class="send-us__title">Send us your works</div>
     <form class="send-us__form feedback-form"
           enctype="multipart/form-data" action="mail.php" method="post">
