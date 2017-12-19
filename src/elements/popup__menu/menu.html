@@ -14,7 +14,8 @@
             accompanied with best author's photos.
         </div>
         <div class="menu__item">
-            <a href="#" ng-href="#/about">More about us</a>
+            <a ng-if="vm.$location.path() !== '/about'" ng-href="#/about">More about us</a>
+            <a ng-if="vm.$location.path() === '/about'" ng-href="#/">Go to main</a>
         </div>
         <div class="menu__item">
             <a href="#" ng-click="vm.activePopupElem.set('sendUs')">Send us</a>

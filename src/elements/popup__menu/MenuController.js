@@ -1,5 +1,6 @@
 export class MenuController {
-    constructor ($scope, activePopupElem) {
+    constructor ($scope, $location, activePopupElem) {
+        this.$location = $location;
         this.activePopupElem = activePopupElem;
     }
 }
