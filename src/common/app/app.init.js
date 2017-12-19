@@ -1,12 +1,11 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-//import ngAnimate from 'angular-animate';
-require("angular-animate/angular-animate.min");
+import ngAnimate from 'angular-animate';
 
 export const app = angular.module('app', [
     require('angular-animate'),
     uiRouter,
-    'ngAnimate'
+    ngAnimate
 ]);
 
 app.run(($rootScope, popupActiveState) => {
