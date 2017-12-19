@@ -1,7 +1,7 @@
 .about {
-  position: absolute;
-  top: 50px;
-  left: 300px;
+  width: 100%;
+  padding-top: 50px;
+  padding-left: 300px;
 
   &__title {
     text-decoration: underline;
@@ -11,16 +11,22 @@
   }
 
   &__members-wrapper {
-    display: flex;
-    align-items: top;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(6, 210px);
+    grid-template-rows: auto;
+    align-items: start;
+    justify-content: start;
+    grid-gap: 15px 50px;
+    padding-right: 50px;
+    padding-bottom: 15px;
+
+    @media screen and (max-width: 1920px) {
+      grid-template-columns: repeat(auto-fit, 210px);
+    }
   }
 
   &__member {
     width: 210px;
-    margin-right: 50px;
-    margin-bottom: 15px;
 
     &__img {
       width: 210px;
