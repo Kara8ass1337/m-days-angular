@@ -6,5 +6,5 @@ export const app = angular.module('app', [
 ]);
 
 /*app.run(($rootScope) => {
-    $rootScope.activePopupElem = 'menu';
+    $rootScope.activePopupElem = 'popup__menu';
 });*/

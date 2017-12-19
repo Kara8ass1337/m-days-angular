@@ -1,6 +1,6 @@
 import './progress-indicator/progress-indicator';
 import './menu-btn/menu-btn';
 import './popup/popup';
-import './popup/menu/menu';
-import './popup/send-to-us/send-us';
-import './popup/donate/donate';
+import './popup__menu/menu';
+import './popup__send-to-us/send-us';
+import './popup__donate/donate';
