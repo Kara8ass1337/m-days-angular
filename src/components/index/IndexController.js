@@ -2,10 +2,9 @@ import {dateForPrint} from 'common/helpers/dateForPrint';
 import {repeatDate} from 'common/helpers/repeatDate';
 import {twoDigitsAlways} from 'common/helpers/twoDigitsAlways';
 
-export class ProgressIndicatorController {
-    constructor ($scope, $filter, $interval) {
+export class IndexController {
+    constructor ($scope, $interval) {
         this.$scope = $scope;
-        this.$filter = $filter;
         this.$interval = $interval;
 
         this.dateForPirnt = dateForPrint(new Date());

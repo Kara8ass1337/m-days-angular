@@ -1,3 +1,37 @@
 <menu-btn></menu-btn>
 <popup></popup>
-<progress-indicator></progress-indicator>
+<div class="progress-indicator">
+    <div class="progress-indicator__shadow">
+        <div class="progress-indicator__wrapper">
+            <div class="progress-indicator__time">
+                <span class="progress-indicator__time__hours">
+                    {{vm.twoDigitsAlways(vm.repeatDate.hours)}}:</span>
+                <span class="progress-indicator__time__minutes">
+                    {{vm.twoDigitsAlways(vm.repeatDate.minutes)}}</span>
+                <span class="progress-indicator__time__seconds">
+                    {{vm.twoDigitsAlways(vm.repeatDate.seconds)}}</span>
+            </div>
+            <div class="progress-indicator__year">
+                <span>{{vm.repeatDate.year}}</span>
+            </div>
+            <div class="progress-indicator__progress-bar">
+                <div class="progress-indicator__progress-bar__bg"></div>
+                <div class="progress-indicator__progress-bar__walking"
+                     style="width: {{vm.progress}}%">
+                </div>
+            </div>
+            <div class="progress-indicator__percent">
+                <span>{{vm.progress.toFixed(2)}} %</span>
+            </div>
+            <div class="progress-indicator__month">
+                {{vm.repeatDate.day}} {{vm.repeatDate.monthText}}
+            </div>
+            <div class="progress-indicator__day">
+                {{vm.repeatDate.dayCount}} of {{vm.repeatDate.daysInYear}} monochrome days
+            </div>
+            <div class="progress-indicator__percent-full">
+                <span>{{vm.progress.toFixed(7)}} %</span>
+            </div>
+        </div>
+    </div>
+</div>

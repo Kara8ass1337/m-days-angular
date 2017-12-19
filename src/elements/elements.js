@@ -1,4 +1,3 @@
-import './progress-indicator/progress-indicator';
 import './menu-btn/menu-btn';
 import './popup/popup';
 import './popup__menu/menu';
