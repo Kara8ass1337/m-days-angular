@@ -71,9 +71,11 @@ module.exports = {
     ],
     context: rootPath,
     resolve: {
-        extensions: ['.js', '.css', '.json', '.md'],
+        extensions: ['.js', '.css', '.styl', '.json', '.md'],
         modules: ['src', 'node_modules'],
-        alias: {}
+        alias: {
+            src: `${rootPath}/src`
+        }
     },
     module: {
         loaders: [{
