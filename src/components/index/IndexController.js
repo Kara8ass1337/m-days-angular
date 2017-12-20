@@ -19,6 +19,6 @@ export class IndexController {
         this.timer = this.$interval(() => {
             this.repeatDate = repeatDate();
             this.progress = this.repeatDate.progress;
-        }, 1000);
+        }, 100);
     }
 }

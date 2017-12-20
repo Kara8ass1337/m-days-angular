@@ -19,9 +19,12 @@ export function repeatDate () {
     const yearStart = moment([year, 0, 1]);
     const daysInYear = moment([year, 11, 31]).diff(yearStart, 'days') + 1;
     const dayCount = date.diff(yearStart, 'days') + 1;
-    const perSec = dayCount * 24 * 60 * 60 + hours * 60 * 60 + minutes * 60 + seconds;
-    const full = 365 * 24 * 60 * 60;
-    const progress = perSec / full * 100;
+    //const perSec = dayCount * 24 * 60 * 60 + hours * 60 * 60 + minutes * 60 + seconds;
+    const perMilliSec = dayCount * 24 * 60 * 60 * 1000 + hours * 60 * 60 * 1000 + minutes * 60 * 1000 + seconds * 1000 + milliseconds;
+    //const full = 365 * 24 * 60 * 60;
+    const full = 365 * 24 * 60 * 60 * 1000;
+    //const progress = perSec / full * 100;
+    const progress = perMilliSec / full * 100;
 
     return {
         date,
