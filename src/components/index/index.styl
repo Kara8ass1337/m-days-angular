@@ -55,10 +55,17 @@
   }
 
   &__month {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: 'Avenir LT Std 35 Light Oblique';
     font-size: 38px;
     background: #020202;
     margin-top: 15px;
+
+    span {
+      margin-top: 8px;
+    }
   }
 
   &__day {
@@ -105,9 +112,32 @@
   }
 
   &__percent-full {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: 'Avenir LT Std 35 Light Oblique';
     font-size: 38px;
     background: #020202;
     margin-top: 15px;
+
+    span {
+      margin-top: 8px;
+    }
   }
+}
+
+.bg,
+.next-bg {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background: #fff no-repeat center;
+  background-size: cover;
+}
+
+.next-bg {
+  left: -200%;
 }
