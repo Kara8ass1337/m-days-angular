@@ -1,22 +1,30 @@
 import {app} from './app.init';
 
-app.service('donateInstructionState', function () {
-    this.donateInstructionState = false;
+class DonateInstructionState {
+    constructor () {
+        this.donateInstructionState = false;
+    }
 
-    this.set = (state) => {
+    set (state) {
         this.donateInstructionState = state;
     };
 
-    this.get = () => {
+    get () {
         return this.donateInstructionState;
     }
+}
+
+app.factory('donateInstructionState', () => {
+    return new DonateInstructionState();
 });
 
-app.service('activePopupElem', ['donateInstructionState', function (donateInstructionState) {
-    this.activePopupElem = 'menu';
-    this.donateInstructionState = donateInstructionState;
+class ActivePopupElem {
+    constructor (donateInstructionState) {
+        this.activePopupElem = 'menu';
+        this.donateInstructionState = donateInstructionState;
+    }
 
-    this.set = (elem) => {
+    set (elem) {
         this.activePopupElem = elem;
 
         if (this.donateInstructionState.get() === true && this.activePopupElem !== 'donate') {
@@ -24,16 +32,22 @@ app.service('activePopupElem', ['donateInstructionState', function (donateInstru
         }
     };
 
-    this.get = () => {
+    get () {
         return this.activePopupElem;
     }
+}
+
+app.factory('activePopupElem', ['donateInstructionState', (donateInstructionState) => {
+    return new ActivePopupElem(donateInstructionState);
 }]);
 
-app.service('popupActiveState', ['donateInstructionState', function (donateInstructionState) {
-    this.donateInstructionState = donateInstructionState;
-    this.popupActiveState = false;
+class PopupActiveState {
+    constructor (donateInstructionState) {
+        this.donateInstructionState = donateInstructionState;
+        this.popupActiveState = false;
+    }
 
-    this.set = (state) => {
+    set (state) {
         this.popupActiveState = state;
 
         if (this.donateInstructionState.get() === true && this.popupActiveState === false) {
@@ -41,7 +55,11 @@ app.service('popupActiveState', ['donateInstructionState', function (donateInstr
         }
     };
 
-    this.get = () => {
+    get () {
         return this.popupActiveState;
     }
+}
+
+app.factory('popupActiveState', ['donateInstructionState', (donateInstructionState) => {
+    return new PopupActiveState(donateInstructionState);
 }]);
