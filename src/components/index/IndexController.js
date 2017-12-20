@@ -9,7 +9,8 @@ export class IndexController {
 
         this.dateForPirnt = dateForPrint(new Date());
         this.repeatDate = repeatDate();
-        this.progress = this.repeatDate.progress;
+        this.progressFull = this.repeatDate.progressFull;
+        this.progressShort = this.repeatDate.progressShort;
         this.twoDigitsAlways = twoDigitsAlways;
 
         this.init();
@@ -18,7 +19,8 @@ export class IndexController {
     init () {
         this.timer = this.$interval(() => {
             this.repeatDate = repeatDate();
-            this.progress = this.repeatDate.progress;
+            this.progressFull = this.repeatDate.progressFull;
+            this.progressShort = this.repeatDate.progressShort;
         }, 100);
     }
 }

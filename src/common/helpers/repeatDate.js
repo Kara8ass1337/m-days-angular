@@ -25,6 +25,8 @@ export function repeatDate () {
     const full = 365 * 24 * 60 * 60 * 1000;
     //const progress = perSec / full * 100;
     const progress = perMilliSec / full * 100;
+    const progressFull = progress.toFixed(7);
+    const progressShort = progressFull.toString().slice(0, (progressFull.indexOf('.') + 3));
 
     return {
         date,
@@ -38,6 +40,8 @@ export function repeatDate () {
         dayCount,
         daysInYear,
         monthText,
-        progress
+        progress,
+        progressFull,
+        progressShort
     };
 }
