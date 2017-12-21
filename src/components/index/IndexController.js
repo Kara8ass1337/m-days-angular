@@ -34,7 +34,7 @@ export class IndexController {
     }
 
     async bgInit () {
-        const data = await this.$http.get('http://localhost:8000/bg');
+        const data = await this.$http.get(`${window.location.origin}/bg`);
         this.bgArr = data.data;
         const bgArrayLength = (this.bgArr.length - 1);
         this.bg = this.bgArr[Math.floor(Math.random() * (bgArrayLength + 1))];
