@@ -6,10 +6,11 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production webpack-dev-server --config webpack/webpack.config.js",
     "start:debug": "npm run start -- --env.debug",
+    "prod-server": "nodemon backend/server.js",
+    "start-prod-server": "npm-run-all -s build prod-server",
     "build": "cross-env NODE_ENV=production webpack --optimize-minimize --config webpack/webpack.config.js",
     "build:debug": "npm run build -- --env.debug",
     "lint": "eslint .",
-    "server": "nodemon backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -81,6 +82,7 @@
     "import-glob-loader": "^1.1.0",
     "node-sass": "^4.5.3",
     "nodemon": "^1.14.1",
+    "npm-run-all": "^4.1.2",
     "open-browser-webpack-plugin": "0.0.5",
     "postcss": "^6.0.13",
     "postcss-loader": "^2.0.6",
