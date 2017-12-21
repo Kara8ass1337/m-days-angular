@@ -1,3 +1,10 @@
+/*
+stylus криво отрабатывает пути,
+~src - это прописано в aliases в webpack.config,
+иначе относительный путь stylus не подцепит, ток ../../
+ */
+@import "~src/common/styles/animations.styl";
+
 .progress-indicator {
   &__shadow {
     height: 100vh;
@@ -140,4 +147,13 @@
 
 .next-bg {
   left: -200%;
+}
+
+.bg {
+  opacity: 1;
+  transition: $fadeTransition;
+
+  &.changing {
+    opacity: 0;
+  }
 }

@@ -3,8 +3,9 @@ import {repeatDate} from 'common/helpers/repeatDate';
 import {twoDigitsAlways} from 'common/helpers/twoDigitsAlways';
 
 export class IndexController {
-    constructor ($scope, $interval, $http) {
+    constructor ($scope, $timeout, $interval, $http) {
         this.$scope = $scope;
+        this.$timeout = $timeout;
         this.$interval = $interval;
         this.$http = $http;
 
@@ -18,6 +19,7 @@ export class IndexController {
         this.bgNext = '';
         this.bgStyle = '';
         this.bgNextStyle = '';
+        this.bgChanging = false;
 
         this.init();
         this.bgInit();
@@ -34,13 +36,13 @@ export class IndexController {
     async bgInit () {
         const data = await this.$http.get('http://localhost:8000/bg');
         this.bgArr = data.data;
-        const bgArrayLenght = (this.bgArr.length - 1);
-        this.bg = this.bgArr[Math.floor(Math.random() * (bgArrayLenght + 1))];
-        this.bgNext = this.bgArr[Math.floor(Math.random() * (bgArrayLenght + 1))];
+        const bgArrayLength = (this.bgArr.length - 1);
+        this.bg = this.bgArr[Math.floor(Math.random() * (bgArrayLength + 1))];
+        this.bgNext = this.bgArr[Math.floor(Math.random() * (bgArrayLength + 1))];
 
         function changeBg () {
             this.bg = this.bgNext;
-            this.bgNext = this.bgArr[Math.floor(Math.random() * (bgArrayLenght + 1))];
+            this.bgNext = this.bgArr[Math.floor(Math.random() * (bgArrayLength + 1))];
             this.bgStyle = {'background-image': `url(img_bg/${this.bg})`};
             this.bgNextStyle = {'background-image': `url(img_bg/${this.bgNext})`};
         }
@@ -48,7 +50,12 @@ export class IndexController {
         changeBg.apply(this);
 
         this.$interval(() => {
-            changeBg.apply(this);
-        }, 5000);
+            this.bgChanging = true;
+
+            this.$timeout(() => {
+                changeBg.apply(this);
+                this.bgChanging = false;
+            }, 500);
+        }, 12000);
     }
 }
