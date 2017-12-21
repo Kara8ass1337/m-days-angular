@@ -1,5 +1,5 @@
 import moment from 'moment';
-moment.locale('en-bg');
+moment.locale('en-bgInit');
 
 /**
  *

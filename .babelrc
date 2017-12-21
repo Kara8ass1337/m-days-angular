@@ -17,10 +17,7 @@
       }
     ],
     [
-      "angularjs-annotate",
-      {
-        "explicitOnly": true
-      }
+      "angularjs-annotate"
     ]
   ]
 }

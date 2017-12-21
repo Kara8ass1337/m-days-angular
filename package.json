@@ -9,6 +9,7 @@
     "build": "cross-env NODE_ENV=production webpack --optimize-minimize --config webpack/webpack.config.js",
     "build:debug": "npm run build -- --env.debug",
     "lint": "eslint .",
+    "server": "nodemon backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -45,13 +46,13 @@
     "angular-ui-bootstrap": "2.3.x",
     "angular-ui-calendar": "1.0.x",
     "angular-ui-router": "0.3.x",
-    "app-root-path": "^2.0.1",
     "babel-runtime": "^6.26.0",
     "lodash-es": "^4.17.4",
     "moment": "^2.19.1",
     "reset-css": "^2.2.1"
   },
   "devDependencies": {
+    "app-root-path": "^2.0.1",
     "autoprefixer": "^7.1.5",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -79,6 +80,7 @@
     "htmlparser2": "^3.9.2",
     "import-glob-loader": "^1.1.0",
     "node-sass": "^4.5.3",
+    "nodemon": "^1.14.1",
     "open-browser-webpack-plugin": "0.0.5",
     "postcss": "^6.0.13",
     "postcss-loader": "^2.0.6",

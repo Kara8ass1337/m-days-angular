@@ -5,6 +5,6 @@ import {IndexController} from './IndexController';
 
 app.component('index', {
     template,
-    controller: ['$scope', '$interval', IndexController],
+    controller: ['$scope', '$interval', '$http', IndexController],
     controllerAs: 'vm'
 });
