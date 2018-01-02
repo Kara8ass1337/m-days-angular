@@ -108,7 +108,7 @@ module.exports = {
             }]
     },
     devServer: {
-        host: 'angular-test.loc',
+        host: 'm-days.loc',
         port: '8081',
         //public: '192.168.1.7:8081',
         contentBase: resolve(__dirname, '../public'),

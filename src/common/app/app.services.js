@@ -50,8 +50,16 @@ class PopupActiveState {
     set (state) {
         this.popupActiveState = state;
 
-        if (this.donateInstructionState.get() === true && this.popupActiveState === false) {
-            this.donateInstructionState.set(false);
+        const body = document.getElementsByTagName('body')[0];
+
+        if (this.popupActiveState === true) {
+            body.classList.add('popup-active');
+        } else {
+            body.classList.remove('popup-active');
+
+            if (this.donateInstructionState.get() === true) {
+                this.donateInstructionState.set(false);
+            }
         }
     };
 
