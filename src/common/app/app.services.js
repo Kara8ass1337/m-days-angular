@@ -50,7 +50,7 @@ class PopupActiveState {
     set (state) {
         this.popupActiveState = state;
 
-        const body = document.getElementsByTagName('body')[0];
+        const body = document.getElementsByTagName('body')[0]; //todo: how can I do it with angular native
 
         if (this.popupActiveState === true) {
             body.classList.add('popup-active');

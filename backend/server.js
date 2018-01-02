@@ -6,7 +6,7 @@ const app = express();
 const port = 8000;
 
 app.use(express.static(`${appRoot}/build`));
-app.use(express.static(`${appRoot}/public`));
+//app.use(express.static(`${appRoot}/public`));
 
 app.get('/bg', async (req, res) => {
     const randomImage = await getRandomImage(`${appRoot}/build/img_bg`);

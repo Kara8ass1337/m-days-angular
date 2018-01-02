@@ -49,6 +49,10 @@ export class IndexController {
             this.bgNext = dataNext.data;
             this.bgStyle = {'background-image': `url(img_bg/${this.bg})`};
             this.bgNextStyle = {'background-image': `url(img_bg/${this.bgNext})`};
+
+            if (this.bg === this.bgNext) {
+                changeBg.apply(this);
+            }
         }
 
         changeBg.apply(this);
