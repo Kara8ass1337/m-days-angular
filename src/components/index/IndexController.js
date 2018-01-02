@@ -34,15 +34,19 @@ export class IndexController {
     }
 
     async bgInit () {
-        const data = await this.$http.get(`${window.location.origin}/bg`);
-        this.bgArr = data.data;
-        const bgArrayLength = (this.bgArr.length - 1);
-        this.bg = this.bgArr[Math.floor(Math.random() * (bgArrayLength + 1))];
-        this.bgNext = this.bgArr[Math.floor(Math.random() * (bgArrayLength + 1))];
+        function getData () {
+            return this.$http.get(`${window.location.origin}/bg`);
+        }
 
-        function changeBg () {
+        const data = await getData.apply(this);
+        const dataNext = await getData.apply(this);
+        this.bg = data.data;
+        this.bgNext = dataNext.data;
+
+        async function changeBg () {
             this.bg = this.bgNext;
-            this.bgNext = this.bgArr[Math.floor(Math.random() * (bgArrayLength + 1))];
+            const dataNext = await getData.apply(this);
+            this.bgNext = dataNext.data;
             this.bgStyle = {'background-image': `url(img_bg/${this.bg})`};
             this.bgNextStyle = {'background-image': `url(img_bg/${this.bgNext})`};
         }
@@ -53,8 +57,9 @@ export class IndexController {
             this.bgChanging = true;
 
             this.$timeout(() => {
-                changeBg.apply(this);
-                this.bgChanging = false;
+                changeBg.apply(this).then(() => {
+                    this.bgChanging = false;
+                });
             }, 500);
         }, 12000);
     }
