@@ -21,7 +21,10 @@ app.post('/mail', async (req, res) => {
     if (req.body.text) {
         res.status(200).send('ok');
 
-        mail(req.body);
+        mail({
+            body: req.body,
+            headers: req.headers
+        });
     } else {
         res.status(400).send('Bad request');
     }

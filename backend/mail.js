@@ -1,4 +1,6 @@
 const nodemailer = require('nodemailer');
+const Busboy = require('busboy');
+
 let mailLocalOptions;
 
 try {
@@ -9,11 +11,11 @@ try {
 
 /**
  *
- * @param text {string}
- * @param attachments[] {string}
+ * @param body {object}
+ * @param headers {object}
  */
-module.exports = function ({text, attachments} = {}) {
-    const transporter = nodemailer.createTransport({
+module.exports = function ({body, headers} = {}) {
+    const smtpTransport = nodemailer.createTransport({
         host: 'cpanel6.d.fozzy.com',
         port: 465,
         secure: true, // true for 465, false for other ports
@@ -25,7 +27,7 @@ module.exports = function ({text, attachments} = {}) {
 
     const attachmentsParsed = [];
 
-    attachments.forEach((item, i) => {
+    body.attachments.forEach((item, i) => {
         attachmentsParsed.push({
             filename: item.filename,
             content: item.path,
@@ -37,17 +39,15 @@ module.exports = function ({text, attachments} = {}) {
         from: '"m-days no-reply" <m-days@m-days.ru>', // sender address
         to: 'shilov-1@yandex.ru', // list of receivers
         subject: 'Photos', // Subject line
-        text,
+        text: body.text
         //attachments: attachmentsParsed
     };
 
-    transporter.sendMail(mailOptions, (err, info) => {
+    smtpTransport.sendMail(mailOptions, (err, info) => {
         if (err) {
             return console.error(err);
         }
 
-        console.log('Message sent: %s');
-
-        transporter.close();
+        smtpTransport.close();
     });
 };
