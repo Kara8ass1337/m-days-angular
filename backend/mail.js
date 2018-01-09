@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer');
-const Busboy = require('busboy');
 
 let mailLocalOptions;
 
