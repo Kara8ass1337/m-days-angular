@@ -7,5 +7,6 @@ gen
 node_modules/
 build/
 stats.json
+*.local.*
 
 design/

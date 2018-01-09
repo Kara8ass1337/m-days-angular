@@ -18,9 +18,14 @@ app.get('/bg', async (req, res) => {
 });
 
 app.post('/mail', async (req, res) => {
-    //mail(req);
+    if (req.body.text) {
+        res.status(200).send('ok');
 
-    //console.log(req.body);
+        mail(req.body);
+    } else {
+        res.status(400).send('Bad request');
+    }
+
 });
 
 app.listen(port, () => {

@@ -1,20 +1,28 @@
 export class sendUsController {
-    constructor ($scope, $http, activePopupElem) {
+    constructor($scope, $http, activePopupElem) {
         this.activePopupElem = activePopupElem;
         this.$http = $http;
         this.$scope = $scope;
         this.vm = this;
     }
 
-    submit () {
-        const data = {
-            name: this.vm.name,
-            email: this.vm.email,
-            msg: this.vm.msg,
-            files: this.vm.files
-        };
+    submit() {
+        const files = this.vm.files;
+        const attachments = [];
 
-        console.log(data);
+        Object.keys(files).forEach((key) => {
+            attachments.push({
+                filename: files[key].name,
+                content: files[key]
+            });
+        });
+
+        const data = {
+            text: `Name: ${this.vm.name},
+        Email: ${this.vm.email},
+        Link: ${this.vm.link}`,
+            attachments
+        };
 
         this.$http.post('/mail', data);
     }
