@@ -1,23 +1,22 @@
 <div class="send-us fade" ng-if="vm.activePopupElem.get() === 'sendUs'">
     <div class="send-us__title">Send us your works</div>
-    <form class="send-us__form feedback-form"
-          enctype="multipart/form-data" action="mail.php" method="post">
+    <form class="send-us__form feedback-form" ng-submit="vm.submit()">
         <div class="send-us__form__line">
-            <label for="nameFF">Name:</label>
-            <input type="text" name="nameFF" id="nameFF" required placeholder="ex: Adam Smith" />
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" ng-model="vm.name" required placeholder="ex: Adam Smith" />
         </div>
         <div class="send-us__form__line">
-            <label for="contactFF">Email:</label>
-            <input type="email" name="contactFF" id="contactFF" required placeholder="ex: adam@gmail.com" />
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" ng-model="vm.email" required placeholder="ex: adam@gmail.com" />
         </div>
         <div class="send-us__form__line">
-            <label for="messageFF">Social link:</label>
-            <input type="text" name="messageFF" id="messageFF" required
+            <label for="msg">Social link:</label>
+            <input type="text" name="msg" id="msg" ng-model="vm.msg" required
                    placeholder="ex: https://instagram.com/m0nochrome_days/" />
         </div>
         <div class="send-us__form__line">
-            <label for="fileFF">Choose files:</label>
-            <input type="file" name="fileFF[]" multiple id="fileFF" />
+            <label for="files">Choose files:</label>
+            <input-file name="files" id="files" ng-model="vm.files" multiple required />
         </div>
         <input value="Send" type="submit" />
     </form>
