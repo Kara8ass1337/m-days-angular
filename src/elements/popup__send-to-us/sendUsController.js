@@ -24,6 +24,7 @@ export class sendUsController {
             attachments
         };
 
-        this.$http.post('/mail', data);
+        //this.$http.post('/mail', data);
+        //todo: заливаем файлы, отправляем их по почте, для заливки файлов использовать multer
     }
 }

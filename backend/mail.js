@@ -1,3 +1,5 @@
+//todo: заливаем файлы, отправляем их по почте, для заливки файлов использовать multer
+
 const nodemailer = require('nodemailer');
 
 let mailLocalOptions;
