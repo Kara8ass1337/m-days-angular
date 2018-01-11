@@ -1,7 +1,7 @@
 const fs = require('fs');
 const appRoot = require('app-root-path');
 const gm = require('gm');
-const readDir = require('./readDir');
+const readDirR = require('./readDir').readDirR;
 
 const imgsPath = `${appRoot}/public/img_bg`;
 const imgsDonePath = `${appRoot}/public/img_bg_done`;
@@ -34,8 +34,6 @@ async function convertImg (imgCur) {
     imgInfo.size = await getInfo(imgPath, 'size');
     imgInfo.format = await getInfo(imgPath, 'format');
 
-    console.log(imgInfo);
-
     gm(imgPath).resize(600).write(`${imgsDonePath}/${imgCur}`, (err) => {
         if (err) throw err;
 
@@ -43,13 +41,13 @@ async function convertImg (imgCur) {
     });
 }
 
-async function convertImgs () {
-    const imgsList = await readDir(imgsPath);
+function convertImgs () {
+    const imgsList = readDirR(imgsPath);
 
     const promisesArr = [];
 
     imgsList.forEach((imgCur) => {
-        promisesArr.push(convertImg(imgCur));
+        promisesArr.push(convertImg(imgCur.name));
     });
 
     Promise.all(promisesArr).then(() => {
