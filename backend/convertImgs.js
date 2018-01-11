@@ -1,7 +1,7 @@
 const fs = require('fs');
 const appRoot = require('app-root-path');
 const gm = require('gm');
-const readDirR = require('./readDir').readDirR;
+const readDir = require('./readDir');
 
 const imgsPath = `${appRoot}/public/img_bg`;
 const imgsDonePath = `${appRoot}/public/img_bg_done`;
@@ -42,7 +42,11 @@ async function convertImg (imgCur) {
 }
 
 function convertImgs () {
-    const imgsList = readDirR(imgsPath);
+    /**
+     *
+     * @type {Array}
+     */
+    const imgsList = readDir(imgsPath);
 
     const promisesArr = [];
 

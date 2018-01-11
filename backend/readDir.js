@@ -6,19 +6,19 @@ const fs = require('fs');
  * @param path
  * @returns {Promise<any>}
  */
-function readDir (path) {
+function ls (path) {
     return fs.readdirSync(path);
 }
 
 const allFiles = [];
 
 /**
- * R = recursive
+ * recursive
  * @param path
  * @returns {Array}
  */
-function readDirR (path) {
-    const files = readDir(path);
+function readDir (path) {
+    const files = ls(path);
 
     files.forEach((fileCur) => {
         const fileCurFullPath = `${path}/${fileCur}`;
@@ -30,15 +30,11 @@ function readDirR (path) {
                 fullPath: fileCurFullPath
             });
         } else if (stats.isDirectory()) {
-            readDirR(fileCurFullPath);
+            readDir(fileCurFullPath);
         }
     });
 
     return allFiles;
 }
 
-module.exports = {
-    readDir,
-    readDirR
-};
-
+module.exports = readDir;
