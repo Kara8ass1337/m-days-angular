@@ -63,7 +63,11 @@ module.exports = {
         }),
         new CopyWebpackPlugin([{
             from: `${rootPath}/public/`,
-            to: `${rootPath}/build/`
+            to: `${rootPath}/build/`,
+            ignore: [{
+                dots: true,
+                glob: 'img_bg_sources/**/*'
+            }]
         }]),
         new OpenBrowserPlugin({
             url: 'http://localhost:8081'

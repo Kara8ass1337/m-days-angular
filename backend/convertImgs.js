@@ -114,8 +114,8 @@ class ConvertImgs {
 }
 
 const convert = new ConvertImgs({
-    imgsPath: `${appRoot}/public/img_bg`,
-    imgsDonePath: `${appRoot}/public/img_bg_done`
+    imgsPath: `${appRoot}/public/img_bg_sources`,
+    imgsDonePath: `${appRoot}/public/img_bg`
 });
 
 convert.start();

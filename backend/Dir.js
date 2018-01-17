@@ -30,6 +30,10 @@ class Dir {
         }));
     }
 
+    static lsSync(path) {
+        return fs.readdirSync(path);
+    }
+
     /**
      * R = recursive
      * @param path
@@ -38,8 +42,8 @@ class Dir {
     static readDir (path) {
         const allFiles = [];
 
-        async function R (path) {
-            const files = await Dir.ls(path);
+        function R (path) {
+            const files = Dir.lsSync(path);
 
             files.forEach((fileCur) => {
                 const fileCurFullPath = `${path}/${fileCur}`;

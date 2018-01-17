@@ -18,9 +18,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.get('/bg', /*rateLimit(rateLimitOpts),*/ async (req, res) => {
-    const randomImage = await getRandomImage(`${appRoot}/public/img_bg`);
+    const screenWidth = req.query.screenWidth;
+    const randomImage = await getRandomImage(`${appRoot}/public/img_bg/${screenWidth}`);
 
-    res.send(randomImage);
+    res.send(`${screenWidth}/${randomImage}`);
 });
 
 /*app.post('/mail', async (req, res) => {
