@@ -1,5 +1,5 @@
 const appRoot = require('app-root-path');
-const getRandomImage = require('./getRandomFile');
+const getRandomImage = require('./getRandomImg');
 const mail = require('./mail');
 const express = require('express');
 const app = express();

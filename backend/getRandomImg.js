@@ -11,7 +11,7 @@ let oldFile;
 module.exports = function (path) {
     return new Promise((resolve, reject) => {
         async function randomFile () {
-            const files = await Dir.readDir(path);
+            const files = await Dir.ls(path);
             const file = files[random(0, files.length - 1)];
 
             if (file === oldFile) {

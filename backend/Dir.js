@@ -22,7 +22,12 @@ class Dir {
      * @param path {string}
      */
     static ls(path) {
-        return fs.readdirSync(path);
+        return new Promise(((resolve, reject) => {
+            fs.readdir(path, (err, files) => {
+                if (err) throw err;
+                resolve(files);
+            });
+        }));
     }
 
     /**
@@ -33,8 +38,8 @@ class Dir {
     static readDir (path) {
         const allFiles = [];
 
-        function R (path) {
-            const files = Dir.ls(path);
+        async function R (path) {
+            const files = await Dir.ls(path);
 
             files.forEach((fileCur) => {
                 const fileCurFullPath = `${path}/${fileCur}`;

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const randomString = require('./randomString');
 const Dir = require('./Dir');
+const randomString = require('./randomString');
 
 class File {
     constructor () {
