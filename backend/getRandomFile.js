@@ -1,5 +1,5 @@
 const random = require('./randomInteger');
-const readDir = require('./readDir');
+const Dir = require('./Dir');
 
 let oldFile;
 
@@ -10,19 +10,16 @@ let oldFile;
  */
 module.exports = function (path) {
     return new Promise((resolve, reject) => {
-        function randomFile () {
-            readDir(path).then((files) => {
-                const file = files[random(0, files.length - 1)];
+        async function randomFile () {
+            const files = await Dir.readDir(path);
+            const file = files[random(0, files.length - 1)];
 
-                if (file === oldFile) {
-                    randomFile();
-                } else {
-                    oldFile = file;
-                    resolve(file);
-                }
-            }).catch((err) => {
-                throw err;
-            });
+            if (file === oldFile) {
+                randomFile();
+            } else {
+                oldFile = file;
+                resolve(file);
+            }
         }
 
         randomFile();
