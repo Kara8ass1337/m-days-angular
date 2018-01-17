@@ -1,6 +1,5 @@
 const fs = require('fs');
-
-const allFiles = [];
+const File = require('./File');
 
 class Dir {
     constructor() {
@@ -18,31 +17,38 @@ class Dir {
         }
     }
 
+    /**
+     *
+     * @param path {string}
+     */
     static ls(path) {
         return fs.readdirSync(path);
     }
 
     /**
-     * recursive
+     * R = recursive
      * @param path
      * @returns {Array}
      */
     static readDir (path) {
-        const files = Dir.ls(path);
+        const allFiles = [];
 
-        files.forEach((fileCur) => {
-            const fileCurFullPath = `${path}/${fileCur}`;
-            const stats = fs.statSync(fileCurFullPath);
+        function R (path) {
+            const files = Dir.ls(path);
 
-            if (stats.isFile()) {
-                allFiles.push({
-                    name: fileCur,
-                    fullPath: fileCurFullPath
-                });
-            } else if (stats.isDirectory()) {
-                Dir.readDir(fileCurFullPath);
-            }
-        });
+            files.forEach((fileCur) => {
+                const fileCurFullPath = `${path}/${fileCur}`;
+                const stats = fs.statSync(fileCurFullPath);
+
+                if (stats.isFile()) {
+                    allFiles.push(File.getInfo(fileCurFullPath));
+                } else if (stats.isDirectory()) {
+                    R(fileCurFullPath);
+                }
+            });
+        }
+
+        R(path);
 
         return allFiles;
     }

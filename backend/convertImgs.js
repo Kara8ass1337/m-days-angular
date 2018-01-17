@@ -2,6 +2,7 @@ const appRoot = require('app-root-path');
 const gm = require('gm');
 const Img = require('./Img');
 const Dir = require('./Dir');
+const randomString = require('./randomString');
 
 class ConvertImgs {
     /**
@@ -26,16 +27,16 @@ class ConvertImgs {
 
     /**
      * @private
-     * @param img {string}
+     * @param img {object}
+     * @param img.fullPath {string}
      * @returns {Promise<void>}
      */
     async prepareToConvert(img) {
-        const path = `${this.imgsPath}/${img}`;
         const info = {};
         const newSize = [];
 
-        info.size = await Img.getInfo(path, 'size');
-        info.format = await Img.getInfo(path, 'format');
+        info.size = await Img.getInfo(img.fullPath, 'size');
+        info.format = await Img.getInfo(img.fullPath, 'format');
 
         const width = info.size.width;
 
@@ -48,8 +49,7 @@ class ConvertImgs {
         });
 
         return this.convert({
-            img: path,
-            name: img,
+            img,
             size: newSize
         });
     }
@@ -71,12 +71,14 @@ class ConvertImgs {
 
     /**
      * @private
-     * @param img {string}
+     * @param img {object}
+     * @param img.fullPath {string}
+     * @param img.ext {string}
      * @param size[] {string}
-     * @param name {string}
      * @returns {Promise<[any]>}
      */
-    convert({img, size, name} = {}) {
+    convert({img, size} = {}) {
+        const newName = randomString();
         const promisesArr = [];
 
         size.forEach((sizeCur) => {
@@ -85,7 +87,7 @@ class ConvertImgs {
             Dir.checkExist(imgCurDoneDir);
 
             promisesArr.push(
-                gm(img).resize(sizeCur).write(`${imgCurDoneDir}/${name}`, (err) => {
+                gm(img.fullPath).resize(sizeCur).write(`${imgCurDoneDir}/${newName}.${img.ext}`, (err) => {
                     if (err) throw err;
 
                     return Promise.resolve();
@@ -96,22 +98,18 @@ class ConvertImgs {
         return Promise.all(promisesArr);
     }
 
-    convertImgs() {
-        /**
-         *
-         * @type {Array}
-         */
+    async start() {
         const imgsList = Dir.readDir(this.imgsPath);
 
         const promisesArr = [];
 
         imgsList.forEach((imgCur) => {
-            promisesArr.push(this.prepareToConvert(imgCur.name));
+            promisesArr.push(this.prepareToConvert(imgCur));
         });
 
-        Promise.all(promisesArr).then(() => {
-            console.log('done');
-        });
+        await Promise.all(promisesArr);
+
+        console.log('done');
     }
 }
 
@@ -120,4 +118,4 @@ const convert = new ConvertImgs({
     imgsDonePath: `${appRoot}/public/img_bg_done`
 });
 
-convert.convertImgs();
+convert.start();
