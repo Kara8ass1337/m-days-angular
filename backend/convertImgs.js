@@ -87,7 +87,8 @@ class ConvertImgs {
             Dir.checkExist(imgCurDoneDir);
 
             promisesArr.push(
-                gm(img.fullPath).resize(sizeCur).write(`${imgCurDoneDir}/${newName}.${img.ext}`, (err) => {
+                gm(img.fullPath).channel('gray').resize(sizeCur).quality(75)
+                    .write(`${imgCurDoneDir}/${newName}.jpg`, (err) => {
                     if (err) throw err;
 
                     return Promise.resolve();
