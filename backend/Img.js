@@ -1,8 +1,5 @@
 const gm = require('gm');
 
-/**
- * class for work with imgs
- */
 class Img {
     constructor() {
 

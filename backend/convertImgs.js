@@ -1,8 +1,7 @@
-const fs = require('fs');
 const appRoot = require('app-root-path');
 const gm = require('gm');
-const readDir = require('./readDir');
 const Img = require('./Img');
+const Dir = require('./Dir');
 
 class ConvertImgs {
     /**
@@ -81,8 +80,12 @@ class ConvertImgs {
         const promisesArr = [];
 
         size.forEach((sizeCur) => {
+            const imgCurDoneDir = `${this.imgsDonePath}/${sizeCur}`;
+
+            Dir.checkExist(imgCurDoneDir);
+
             promisesArr.push(
-                gm(img).resize(sizeCur).write(`${this.imgsDonePath}/${sizeCur}/${name}`, (err) => {
+                gm(img).resize(sizeCur).write(`${imgCurDoneDir}/${name}`, (err) => {
                     if (err) throw err;
 
                     return Promise.resolve();
@@ -98,7 +101,7 @@ class ConvertImgs {
          *
          * @type {Array}
          */
-        const imgsList = readDir(this.imgsPath);
+        const imgsList = Dir.readDir(this.imgsPath);
 
         const promisesArr = [];
 
