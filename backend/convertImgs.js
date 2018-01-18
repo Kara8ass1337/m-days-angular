@@ -31,7 +31,7 @@ class ConvertImgs {
      * @private
      * @param img {object}
      * @param img.fullPath {string}
-     * @returns {Promise<void>}
+     * @returns {Promise}
      */
     async prepareToConvert(img) {
         const info = {};
@@ -70,7 +70,7 @@ class ConvertImgs {
             if (maxWidth >= widthCur) newSize.push(widthCur);
         });
 
-        return this.convert({
+        return await this.convert({
             img,
             size: newSize
         });
@@ -82,6 +82,7 @@ class ConvertImgs {
      * @param img.fullPath {string}
      * @param img.nameWithoutExt {string}
      * @param size {object}
+     * @returns {Promise}
      */
     static tryToSquare({img, size} = {}) {
         const cropVal = size.height < size.width ? size.height : size.width;
@@ -173,6 +174,8 @@ class ConvertImgs {
         });
 
         await Promise.all(promisesArr);
+
+        //todo: promises do not correctly, fix it
 
         console.log('done');
     }
