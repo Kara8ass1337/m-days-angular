@@ -35,4 +35,8 @@ Then convert images ```npm run convert```,
 
 make build ```npm run build``` 
 
-and start server ```npm run server```
+and start server ```npm run server```.
+
+Or just by ```npm run start```.
+
+To run webpack-dev-server do ```npm run start:debug```
