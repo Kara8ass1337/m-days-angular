@@ -31,12 +31,10 @@ perl Makefile.PL
 sudo make install
 ``` 
 
-Then convert images ```npm run convert```, 
-
-make build ```npm run build``` 
+Then make build ```npm run build``` 
 
 and start server ```npm run server```.
 
-Or just by ```npm run start```.
+Or just ```npm run start```.
 
-For run webpack-dev-server use ```npm run start:debug```
+For run webpack-dev-server use ```npm run start-dev```

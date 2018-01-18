@@ -4,11 +4,11 @@
   "description": "---",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all -s convert build server",
-    "start:debug": "cross-env NODE_ENV=production webpack-dev-server --config webpack/webpack.config.js",
+    "start": "npm-run-all -s build server",
+    "start-dev": "cross-env NODE_ENV=production webpack-dev-server --config webpack/webpack.config.js",
     "server": "nodemon backend/server.js",
-    "build": "cross-env NODE_ENV=production webpack --optimize-minimize --config webpack/webpack.config.js",
-    "build:debug": "npm run build -- --env.debug",
+    "build": "npm-run-all -s convert build-no-convert",
+    "build-no-convert": "cross-env NODE_ENV=production webpack --optimize-minimize --config webpack/webpack.config.js",
     "convert": "node backend/convertImgs.js",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
