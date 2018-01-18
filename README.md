@@ -4,7 +4,7 @@ just learning angular 1.x, take no notice
 #How to install
 ```npm i```
 
-**Then install GraphicsMagick**
+**Then install [GraphicsMagick](http://www.graphicsmagick.org)**
 
 Windows: https://sourceforge.net/projects/graphicsmagick/files/graphicsmagick-binaries/1.3.27/
 
@@ -17,8 +17,7 @@ sudo apt-get update
 sudo apt-get install graphicsmagick
 ```
 
-**And install exiftool**
-https://www.sno.phy.queensu.ca/~phil/exiftool/index.html
+**And install [exiftool](https://www.sno.phy.queensu.ca/~phil/exiftool/index.html)**
 
 Windows/MacOS: There is usual procedure.
 
