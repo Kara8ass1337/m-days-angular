@@ -1,4 +1,5 @@
 const appRoot = require('app-root-path');
+const fs = require('fs-extra');
 const gm = require('gm');
 const Img = require('./Img');
 const Dir = require('./Dir');
@@ -82,7 +83,7 @@ class ConvertImgs {
      * @param img.nameWithoutExt {string}
      * @param size {object}
      */
-    static tryToSquare ({img, size} = {}) {
+    static tryToSquare({img, size} = {}) {
         const cropVal = size.height < size.width ? size.height : size.width;
 
         return new Promise(((resolve, reject) => {
@@ -120,6 +121,7 @@ class ConvertImgs {
      * @private
      * @param img {object}
      * @param img.fullPath {string}
+     * @param img.name {string}
      * @param img.ext {string}
      * @param size[] {string}
      * @returns {Promise<[any]>}
@@ -136,13 +138,12 @@ class ConvertImgs {
             promisesArr.push(
                 gm(img.fullPath).channel('gray').resize(sizeCur).quality(75)
                     .write(`${imgCurDoneDir}/${newName}.jpg`, (err) => {
-                    if (err) throw err;
+                        if (err) throw err;
 
-                    console.log(`${img.fullPath} is now jpg, gray, 
-                    resized with width ${sizeCur} with quality 75;`);
+                        console.log(`${img.name} converted to ${sizeCur}/${newName}.jpg`);
 
-                    return Promise.resolve();
-                })
+                        return Promise.resolve();
+                    })
             );
         });
 
@@ -150,6 +151,19 @@ class ConvertImgs {
     }
 
     async start() {
+        /**
+         * empty folder before convert.
+         * it's need because of random name for
+         * each new converted image.
+         * so if not empty there will many duplicate
+         */
+        try {
+            await fs.emptyDir(this.imgsDonePath);
+            console.log(`${this.imgsDonePath} is now empty;`);
+        } catch (err) {
+            throw err;
+        }
+
         const imgsList = Dir.readDir(this.imgsPath);
 
         const promisesArr = [];
