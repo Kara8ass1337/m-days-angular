@@ -39,4 +39,4 @@ and start server ```npm run server```.
 
 Or just by ```npm run start```.
 
-To run webpack-dev-server do ```npm run start:debug```
+For run webpack-dev-server use ```npm run start:debug```

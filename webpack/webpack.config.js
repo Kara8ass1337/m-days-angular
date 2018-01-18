@@ -112,7 +112,7 @@ module.exports = {
             }]
     },
     devServer: {
-        host: 'm-days.loc',
+        host: 'localhost',
         port: '8081',
         //public: '192.168.1.7:8081',
         contentBase: resolve(__dirname, '../public'),
