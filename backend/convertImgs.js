@@ -2,6 +2,7 @@ const appRoot = require('app-root-path');
 const gm = require('gm');
 const Img = require('./Img');
 const Dir = require('./Dir');
+const File = require('./File');
 const randomString = require('./randomString');
 
 class ConvertImgs {
@@ -39,8 +40,28 @@ class ConvertImgs {
         info.format = await Img.getInfo(img.fullPath, 'format');
 
         const width = info.size.width;
+        const height = info.size.height;
+        const delta = (width / height);
 
-        if (width < 640) return;
+        if (width < 640) {
+            console.log(`${img.fullPath} is too small, skipped;`);
+            return;
+        }
+
+        if (delta < 1 || delta > 2) {
+            const tryToSquareResult = await ConvertImgs.tryToSquare({
+                img,
+                size: info.size
+            });
+
+            console.log(`${img.fullPath} is not valid due size;`);
+
+            if (tryToSquareResult !== false) {
+                img = tryToSquareResult;
+
+                console.log(`${img.fullPath} was cropped to square;`);
+            }
+        }
 
         const maxWidth = ConvertImgs.getMaxWidth(width);
 
@@ -52,6 +73,32 @@ class ConvertImgs {
             img,
             size: newSize
         });
+    }
+
+    /**
+     *
+     * @param img {object}
+     * @param img.fullPath {string}
+     * @param img.nameWithoutExt {string}
+     * @param size {object}
+     */
+    static tryToSquare ({img, size} = {}) {
+        const cropVal = size.height < size.width ? size.height : size.width;
+
+        return new Promise(((resolve, reject) => {
+            gm(img.fullPath).gravity('Center').crop(cropVal, cropVal)
+                .write(img.fullPath, async (err) => {
+                    if (err) throw err;
+
+                    const size = await Img.getInfo(img.fullPath, 'size');
+
+                    if (size.width < 640) {
+                        resolve(false);
+                    } else {
+                        resolve(File.getInfo(img.fullPath));
+                    }
+                });
+        }));
     }
 
     /**
@@ -90,6 +137,9 @@ class ConvertImgs {
                 gm(img.fullPath).channel('gray').resize(sizeCur).quality(75)
                     .write(`${imgCurDoneDir}/${newName}.jpg`, (err) => {
                     if (err) throw err;
+
+                    console.log(`${img.fullPath} is now jpg, gray, 
+                    resized with width ${sizeCur} with quality 75;`);
 
                     return Promise.resolve();
                 })

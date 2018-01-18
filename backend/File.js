@@ -55,9 +55,13 @@ class File {
      * @param pathFile {string}
      */
     static getInfo (pathFile) {
+        const name = path.basename(pathFile);
+        const ext = path.extname(pathFile);
+
         return {
-            name: path.basename(pathFile),
-            ext: path.extname(pathFile).replace('.', ''),
+            name,
+            ext: ext.replace('.', ''),
+            nameWithoutExt: name.replace(ext, ''),
             fullPath: pathFile,
             fullPathWithoutName: path.dirname(pathFile),
         }
