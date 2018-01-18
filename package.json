@@ -82,6 +82,7 @@
     "html-webpack-plugin": "^2.30.1",
     "htmlparser2": "^3.9.2",
     "import-glob-loader": "^1.1.0",
+    "node-exiftool": "^2.3.0",
     "node-sass": "^4.5.3",
     "nodemailer": "^4.4.1",
     "nodemon": "^1.14.1",

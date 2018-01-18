@@ -1,6 +1,8 @@
 const appRoot = require('app-root-path');
 const fs = require('fs-extra');
 const gm = require('gm');
+const exiftool = require('node-exiftool');
+const ep = new exiftool.ExiftoolProcess();
 const Img = require('./Img');
 const Dir = require('./Dir');
 const File = require('./File');
@@ -133,13 +135,16 @@ class ConvertImgs {
 
         size.forEach((sizeCur) => {
             const imgCurDoneDir = `${this.imgsDonePath}/${sizeCur}`;
+            const newFullName = `${imgCurDoneDir}/${newName}.jpg`;
 
             Dir.checkExist(imgCurDoneDir);
 
             promisesArr.push(
                 gm(img.fullPath).channel('gray').resize(sizeCur).quality(75)
-                    .write(`${imgCurDoneDir}/${newName}.jpg`, (err) => {
+                    .write(`${newFullName}`, (err) => {
                         if (err) throw err;
+
+                        //ConvertImgs.ReadMetaData(newFullName);
 
                         console.log(`${img.name} converted to ${sizeCur}/${newName}.jpg`);
 
@@ -149,6 +154,18 @@ class ConvertImgs {
         });
 
         return Promise.all(promisesArr);
+    }
+
+    static ReadMetaData(img) {
+        ep
+            .open()
+            // display pid
+            .then((pid) => console.log('Started exiftool process %s', pid))
+            .then(() => ep.readMetadata(img, ['-File:all']))
+            .then(console.log, console.error)
+            .then(() => ep.close())
+            .then(() => console.log('Closed exiftool'))
+            .catch(console.error);
     }
 
     async start() {
