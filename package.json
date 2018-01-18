@@ -9,6 +9,7 @@
     "server": "nodemon backend/server.js",
     "build": "cross-env NODE_ENV=production webpack --optimize-minimize --config webpack/webpack.config.js",
     "build:debug": "npm run build -- --env.debug",
+    "convert": "node backend/convertImgs.js",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,7 +21,7 @@
     "---"
   ],
   "author": "Shilov Oleg jr",
-  "license": "ISC",
+  "license": "GPLv3",
   "browserslist": {
     "production": [
       "last 10 version",
