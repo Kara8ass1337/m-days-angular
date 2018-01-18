@@ -145,6 +145,7 @@ class ConvertImgs {
                         if (err) throw err;
 
                         //ConvertImgs.ReadMetaData(newFullName);
+                        //todo: delete = writeMetadata with ['overwrite_original'] option
 
                         console.log(`${img.name} converted to ${sizeCur}/${newName}.jpg`);
 
