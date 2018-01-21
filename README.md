@@ -1,7 +1,7 @@
 # m-days-angular
 just learning angular 1.x, take no notice
 
-#How to install
+# How to install
 ```npm i```
 
 **Then install [GraphicsMagick](http://www.graphicsmagick.org)**

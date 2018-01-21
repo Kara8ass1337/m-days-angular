@@ -1,6 +1,6 @@
 const appRoot = require('app-root-path');
 const getRandomImage = require('./getRandomImg');
-const mail = require('./mail');
+//const mail = require('./mail');
 const express = require('express');
 const app = express();
 const port = 8000;
