@@ -14,7 +14,7 @@ class ConvertImgs {
      * @param imgsPath {string}
      * @param imgsDonePath {string}
      */
-    constructor({imgsPath, imgsDonePath} = {}) {
+    constructor ({imgsPath, imgsDonePath} = {}) {
         this.imgsPath = imgsPath;
         this.imgsDonePath = imgsDonePath;
         this.widthArr = [
@@ -35,7 +35,7 @@ class ConvertImgs {
      * @param img.fullPath {string}
      * @returns {Promise}
      */
-    async prepareToConvert(img) {
+    async prepareToConvert (img) {
         const info = {};
         const newSize = [];
 
@@ -72,7 +72,7 @@ class ConvertImgs {
             if (maxWidth >= widthCur) newSize.push(widthCur);
         });
 
-        return await this.convert({
+        return this.convert({
             img,
             size: newSize
         });
@@ -86,7 +86,7 @@ class ConvertImgs {
      * @param size {object}
      * @returns {Promise}
      */
-    static tryToSquare({img, size} = {}) {
+    static tryToSquare ({img, size} = {}) {
         const cropVal = size.height < size.width ? size.height : size.width;
 
         return new Promise(((resolve, reject) => {
@@ -109,7 +109,7 @@ class ConvertImgs {
      * @private
      * @param width {number}
      */
-    static getMaxWidth(width) {
+    static getMaxWidth (width) {
         if (width >= 640 && width < 1280) return 640;
         else if (width >= 1280 && width < 1600) return 1280;
         else if (width >= 1600 && width < 1920) return 1600;
@@ -129,7 +129,7 @@ class ConvertImgs {
      * @param size[] {string}
      * @returns {Promise<[any]>}
      */
-    convert({img, size} = {}) {
+    convert ({img, size} = {}) {
         const newName = randomString();
         const promisesArr = [];
 
@@ -157,7 +157,7 @@ class ConvertImgs {
         return Promise.all(promisesArr);
     }
 
-    static ReadMetaData(img) {
+    static ReadMetaData (img) {
         ep
             .open()
             // display pid
@@ -169,7 +169,7 @@ class ConvertImgs {
             .catch(console.error);
     }
 
-    async start() {
+    async start () {
         /**
          * empty folder before convert.
          * it's need because of random name for
@@ -183,7 +183,10 @@ class ConvertImgs {
             throw err;
         }
 
-        const imgsList = Dir.readDir(this.imgsPath);
+        const imgsList = Dir.readDir({
+            path: this.imgsPath,
+            formats: ['bmp', 'gif', 'jng', 'jp2', 'jpc', 'jpeg', 'jpg', 'png', 'ptif', 'tiff']
+        });
 
         const promisesArr = [];
 

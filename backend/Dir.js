@@ -36,10 +36,11 @@ class Dir {
 
     /**
      * R = recursive
-     * @param path
+     * @param path {string}
+     * @param [formats[]] {string}
      * @returns {Array}
      */
-    static readDir (path) {
+    static readDir ({path, formats = []}) {
         const allFiles = [];
 
         function R (path) {
@@ -50,7 +51,22 @@ class Dir {
                 const stats = fs.statSync(fileCurFullPath);
 
                 if (stats.isFile()) {
-                    allFiles.push(File.getInfo(fileCurFullPath));
+                    const fileInfo = File.getInfo(fileCurFullPath);
+
+                    if (formats.length === 0) {
+                        allFiles.push(fileInfo);
+                        return;
+                    }
+
+                    const formatIsOk = formats.some((formatCur) => {
+                        return formatCur.toLowerCase() === fileInfo.ext.toLowerCase();
+                    });
+
+                    if (formatIsOk === true) {
+                        allFiles.push(fileInfo);
+                    } else {
+                        console.log(`${fileCurFullPath} has wrong format, skip`);
+                    }
                 } else if (stats.isDirectory()) {
                     R(fileCurFullPath);
                 }

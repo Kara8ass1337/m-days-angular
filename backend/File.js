@@ -56,7 +56,7 @@ class File {
      */
     static getInfo (pathFile) {
         const name = path.basename(pathFile);
-        const ext = path.extname(pathFile);
+        const ext = path.extname(pathFile).toLowerCase();
 
         return {
             name,
