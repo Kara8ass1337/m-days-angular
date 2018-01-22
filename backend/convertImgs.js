@@ -35,7 +35,7 @@ class ConvertImgs {
      * @param img.fullPath {string}
      * @returns {Promise}
      */
-    async prepareToConvert (img) {
+    async setupTargets (img) {
         const info = {};
         const newSize = [];
 
@@ -72,10 +72,12 @@ class ConvertImgs {
             if (maxWidth >= widthCur) newSize.push(widthCur);
         });
 
-        return this.convert({
+        const target = {
             img,
             size: newSize
-        });
+        };
+
+        return Promise.resolve(target);
     }
 
     /**
@@ -121,40 +123,58 @@ class ConvertImgs {
     }
 
     /**
-     * @private
+     *
      * @param img {object}
      * @param img.fullPath {string}
      * @param img.name {string}
      * @param img.ext {string}
      * @param size[] {string}
-     * @returns {Promise<[any]>}
      */
-    convert ({img, size} = {}) {
-        const newName = randomString();
+    prepareToConvert ({img, size} = {}) {
         const promisesArr = [];
 
         size.forEach((sizeCur) => {
+            const newName = randomString();
             const imgCurDoneDir = `${this.imgsDonePath}/${sizeCur}`;
             const newFullName = `${imgCurDoneDir}/${newName}.jpg`;
-
             Dir.checkExist(imgCurDoneDir);
 
-            promisesArr.push(
-                gm(img.fullPath).channel('gray').resize(sizeCur).quality(75)
-                    .write(`${newFullName}`, (err) => {
-                        if (err) throw err;
-
-                        //ConvertImgs.ReadMetaData(newFullName);
-                        //todo: delete = writeMetadata with ['overwrite_original'] option
-
-                        console.log(`${img.name} converted to ${sizeCur}/${newName}.jpg`);
-
-                        return Promise.resolve();
-                    })
-            );
+            promisesArr.push(this.convert({
+                img,
+                size: sizeCur,
+                newName,
+                newFullName
+            }))
         });
 
         return Promise.all(promisesArr);
+    }
+
+    /**
+     * @private
+     * @param img {object}
+     * @param img.fullPath {string}
+     * @param img.name {string}
+     * @param img.ext {string}
+     * @param size {string}
+     * @param newName {string}
+     * @param newFullName {string}
+     * @returns {Promise<[any]>}
+     */
+    convert ({img, size, newName, newFullName} = {}) {
+        return new Promise(((resolve, reject) => {
+            gm(img.fullPath).channel('gray').resize(size).quality(75)
+                .write(`${newFullName}`, (err) => {
+                    if (err) throw err;
+
+                    //ConvertImgs.ReadMetaData(newFullName);
+                    //todo: delete = writeMetadata with ['overwrite_original'] option
+
+                    console.log(`${img.name} converted to ${size}/${newName}.jpg`);
+
+                    resolve();
+                });
+        }));
     }
 
     static ReadMetaData (img) {
@@ -188,13 +208,21 @@ class ConvertImgs {
             formats: ['bmp', 'gif', 'jng', 'jp2', 'jpc', 'jpeg', 'jpg', 'png', 'ptif', 'tiff']
         });
 
-        const promisesArr = [];
+        const targetsPromisesArr = [];
 
         imgsList.forEach((imgCur) => {
-            promisesArr.push(this.prepareToConvert(imgCur));
+            targetsPromisesArr.push(this.setupTargets(imgCur));
         });
 
-        await Promise.all(promisesArr);
+        const targets = await Promise.all(targetsPromisesArr);
+
+        const resultsPromisesArr = [];
+
+        targets.forEach((targetCur) => {
+            resultsPromisesArr.push(this.prepareToConvert(targetCur));
+        });
+
+        await Promise.all(resultsPromisesArr);
 
         //todo: promises do not correctly, fix it
 

@@ -9,7 +9,6 @@ class Dir {
     /**
      *
      * @param path {string}
-     * @returns {Promise<any>}
      */
     static checkExist(path) {
         if (!fs.existsSync(path)) {
