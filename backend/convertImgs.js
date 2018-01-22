@@ -3,6 +3,7 @@ const fs = require('fs-extra');
 const gm = require('gm');
 const exiftool = require('node-exiftool');
 const ep = new exiftool.ExiftoolProcess();
+const eachSeries = require('async/eachSeries');
 const Img = require('./Img');
 const Dir = require('./Dir');
 const File = require('./File');
@@ -133,13 +134,13 @@ class ConvertImgs {
     prepareToConvert ({img, size} = {}) {
         const promisesArr = [];
 
-        size.forEach((sizeCur) => {
+        size.forEach(async (sizeCur) => {
             const newName = randomString();
             const imgCurDoneDir = `${this.imgsDonePath}/${sizeCur}`;
             const newFullName = `${imgCurDoneDir}/${newName}.jpg`;
             Dir.checkExist(imgCurDoneDir);
 
-            promisesArr.push(this.convert({
+            promisesArr.push(await this.convert({
                 img,
                 size: sizeCur,
                 newName,
@@ -148,6 +149,38 @@ class ConvertImgs {
         });
 
         return Promise.all(promisesArr);
+    }
+
+    /**
+     *
+     * @param img {object}
+     * @param img.fullPath {string}
+     * @param img.name {string}
+     * @param img.ext {string}
+     * @param size[] {string}
+     */
+    prepareToConvertAsync ({img, size} = {}) {
+        return new Promise((resolve, reject) => {
+            eachSeries(size, (sizeCur) => {
+                const newName = randomString();
+                const imgCurDoneDir = `${this.imgsDonePath}/${sizeCur}`;
+                const newFullName = `${imgCurDoneDir}/${newName}.jpg`;
+                Dir.checkExist(imgCurDoneDir);
+
+                this.convert({
+                    img,
+                    size: sizeCur,
+                    newName,
+                    newFullName
+                }).then(() => {
+                    resolve();
+                });
+            }, (err) => {
+                if (err) throw err;
+
+                console.log('done prepare async');
+            });
+        });
     }
 
     /**
@@ -219,7 +252,7 @@ class ConvertImgs {
         const resultsPromisesArr = [];
 
         targets.forEach((targetCur) => {
-            resultsPromisesArr.push(this.prepareToConvert(targetCur));
+            resultsPromisesArr.push(this.prepareToConvertAsync(targetCur));
         });
 
         await Promise.all(resultsPromisesArr);

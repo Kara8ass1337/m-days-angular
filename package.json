@@ -54,6 +54,7 @@
   },
   "devDependencies": {
     "app-root-path": "^2.0.1",
+    "async": "^2.6.0",
     "autoprefixer": "^7.1.5",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
