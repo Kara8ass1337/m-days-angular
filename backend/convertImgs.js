@@ -3,6 +3,7 @@ const fs = require('fs-extra');
 const gm = require('gm');
 const exiftool = require('node-exiftool');
 const ep = new exiftool.ExiftoolProcess();
+const eachLimit = require('async/eachLimit');
 const eachSeries = require('async/eachSeries');
 const Img = require('./Img');
 const Dir = require('./Dir');
@@ -53,6 +54,7 @@ class ConvertImgs {
         }
 
         if (delta < 1 || delta > 2) {
+            //todo: проверить, что отрабатывает корректно
             const tryToSquareResult = await ConvertImgs.tryToSquare({
                 img,
                 size: info.size
@@ -132,36 +134,9 @@ class ConvertImgs {
      * @param size[] {string}
      */
     prepareToConvert ({img, size} = {}) {
-        const promisesArr = [];
-
-        size.forEach(async (sizeCur) => {
-            const newName = randomString();
-            const imgCurDoneDir = `${this.imgsDonePath}/${sizeCur}`;
-            const newFullName = `${imgCurDoneDir}/${newName}.jpg`;
-            Dir.checkExist(imgCurDoneDir);
-
-            promisesArr.push(await this.convert({
-                img,
-                size: sizeCur,
-                newName,
-                newFullName
-            }))
-        });
-
-        return Promise.all(promisesArr);
-    }
-
-    /**
-     *
-     * @param img {object}
-     * @param img.fullPath {string}
-     * @param img.name {string}
-     * @param img.ext {string}
-     * @param size[] {string}
-     */
-    prepareToConvertAsync ({img, size} = {}) {
         return new Promise((resolve, reject) => {
-            eachSeries(size, (sizeCur) => {
+            //todo: попробовать eachLimit вместо eachSeries
+            eachSeries(size, (sizeCur, next) => {
                 const newName = randomString();
                 const imgCurDoneDir = `${this.imgsDonePath}/${sizeCur}`;
                 const newFullName = `${imgCurDoneDir}/${newName}.jpg`;
@@ -173,12 +148,14 @@ class ConvertImgs {
                     newName,
                     newFullName
                 }).then(() => {
-                    resolve();
+                    next();
                 });
             }, (err) => {
                 if (err) throw err;
 
-                console.log('done prepare async');
+                console.log(`done with ${img.name}`);
+
+                resolve();
             });
         });
     }
@@ -241,6 +218,8 @@ class ConvertImgs {
             formats: ['bmp', 'gif', 'jng', 'jp2', 'jpc', 'jpeg', 'jpg', 'png', 'ptif', 'tiff']
         });
 
+        //todo: раскидать всё, что ниже по методам
+
         const targetsPromisesArr = [];
 
         imgsList.forEach((imgCur) => {
@@ -252,7 +231,7 @@ class ConvertImgs {
         const resultsPromisesArr = [];
 
         targets.forEach((targetCur) => {
-            resultsPromisesArr.push(this.prepareToConvertAsync(targetCur));
+            resultsPromisesArr.push(this.prepareToConvert(targetCur));
         });
 
         await Promise.all(resultsPromisesArr);
