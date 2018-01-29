@@ -3,7 +3,6 @@ const fs = require('fs-extra');
 const gm = require('gm');
 const exiftool = require('node-exiftool');
 const ep = new exiftool.ExiftoolProcess();
-const eachLimit = require('async/eachLimit');
 const eachSeries = require('async/eachSeries');
 const Img = require('./Img');
 const Dir = require('./Dir');
@@ -27,7 +26,7 @@ class ConvertImgs {
      * @private
      * @returns {Array}
      */
-    getImgColl () {
+    getImages () {
         return Dir.readDir({
             path: this.imgsPath,
             formats: this.allowFormats
@@ -74,7 +73,6 @@ class ConvertImgs {
         }
 
         if (delta < 1 || delta > 2) {
-            //todo: проверить, что отрабатывает корректно
             const tryToSquareResult = await ConvertImgs.tryToSquare({
                 img,
                 size: info.size
@@ -105,17 +103,42 @@ class ConvertImgs {
 
     /**
      * @private
-     * @param imgColl[] {object}; collection of images
+     * @param images[] {object}; collection of images
      * @returns {Promise}
      */
-    formatEachTarget (imgColl) {
+    formatEachTarget (images) {
         const targetsPromisesArr = [];
 
-        imgColl.forEach((imgCur) => {
+        images.forEach((imgCur) => {
             targetsPromisesArr.push(this.formatTarget(imgCur));
         });
 
         return Promise.all(targetsPromisesArr);
+    }
+
+    /**
+     * @private
+     * @param targets[] {object}; collection of targets
+     * @returns {Promise}
+     */
+    convertEachTarget (targets) {
+        return new Promise((resolve, reject) => {
+            /**
+             * targets = collection to iterate over,
+             * function (targetCur, next), next = iteration callback,
+             * function (err) = last iteration callback
+             */
+            eachSeries(targets, (targetCur, next) => {
+                const promise = this.convertTargetEachSize(targetCur);
+                promise.then(() => {
+                    next();
+                });
+            }, (err) => {
+                if (err) throw err;
+
+                resolve();
+            });
+        });
     }
 
     /**
@@ -168,7 +191,7 @@ class ConvertImgs {
      * @param img.ext {string}
      * @param sizes[] {string}
      */
-    convertEachSize ({img, sizes} = {}) {
+    convertTargetEachSize ({img, sizes} = {}) {
         return new Promise((resolve, reject) => {
             /**
              * sizes = collection to iterate over,
@@ -213,11 +236,16 @@ class ConvertImgs {
     convert ({img, size, newName, newFullName} = {}) {
         return new Promise(((resolve, reject) => {
             gm(img.fullPath).channel('gray').resize(size).quality(75)
-                .write(`${newFullName}`, (err) => {
+                .write(`${newFullName}`, async (err) => {
                     if (err) throw err;
 
-                    //ConvertImgs.ReadMetaData(newFullName);
-                    //todo: delete = writeMetadata with ['overwrite_original'] option
+                    try {
+                        await ConvertImgs.removeMetaData(newFullName);
+
+                        console.log(`meta was removed from ${size}/${newName}.jpg`);
+                    } catch (err) {
+                        console.error(err);
+                    }
 
                     console.log(`${img.name} converted to ${size}/${newName}.jpg`);
 
@@ -226,39 +254,34 @@ class ConvertImgs {
         }));
     }
 
-    static ReadMetaData (img) {
-        ep
-            .open()
-            // display pid
-            .then((pid) => console.log('Started exiftool process %s', pid))
-            .then(() => ep.readMetadata(img, ['-File:all']))
-            .then(console.log, console.error)
-            .then(() => ep.close())
-            .then(() => console.log('Closed exiftool'))
-            .catch(console.error);
+    /**
+     *
+     * @param img {string}; full path
+     */
+    static removeMetaData (img) {
+        return new Promise(((resolve, reject) => {
+            ep
+                .open()
+                .then(() => ep.writeMetadata(img, {all: ''}, ['overwrite_original']))
+                .then(() => ep.close())
+                .then(() => {
+                    resolve();
+                })
+                .catch((err) => {
+                    reject(err);
+                });
+        }));
     }
 
     async start () {
         this.emptyImgsDoneDir();
 
-        const imgColl = this.getImgColl();
-        const targets = await this.formatEachTarget(imgColl);
+        const images = this.getImages();
+        const targets = await this.formatEachTarget(images);
 
-        /**
-         * targets = collection to iterate over,
-         * function (targetCur, next), next = iteration callback,
-         * function (err) = last iteration callback
-         */
-        eachSeries(targets, (targetCur, next) => {
-            const promise = this.convertEachSize(targetCur);
-            promise.then(() => {
-                next();
-            });
-        }, (err) => {
-            if (err) throw err;
+        await this.convertEachTarget(targets);
 
-            console.log('done');
-        });
+        console.log('done');
     }
 }
 
