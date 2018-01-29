@@ -19,16 +19,36 @@ class ConvertImgs {
     constructor ({imgsPath, imgsDonePath} = {}) {
         this.imgsPath = imgsPath;
         this.imgsDonePath = imgsDonePath;
-        this.allowSizes = [
-            640,
-            1280,
-            1600,
-            1920,
-            2560,
-            3840,
-            5210,
-            7680
-        ];
+        this.allowSizes = [640, 1280, 1600, 1920, 2560, 3840, 5210, 7680];
+        this.allowFormats = ['bmp', 'gif', 'jng', 'jp2', 'jpc', 'jpeg', 'jpg', 'png', 'ptif', 'tiff'];
+    }
+
+    /**
+     * @private
+     * @returns {Array}
+     */
+    getImgColl () {
+        return Dir.readDir({
+            path: this.imgsPath,
+            formats: this.allowFormats
+        });
+    }
+
+    /**
+     * @private
+     * empty folder before convert.
+     * it's need because of random name for
+     * each new converted image.
+     * so if not empty there will be many duplicate
+     */
+    async emptyImgsDoneDir () {
+        try {
+            await fs.emptyDir(this.imgsDonePath);
+
+            console.log(`${this.imgsDonePath} is now empty;`);
+        } catch (err) {
+            throw err;
+        }
     }
 
     /**
@@ -37,7 +57,7 @@ class ConvertImgs {
      * @param img.fullPath {string}
      * @returns {Promise}
      */
-    async setupTarget (img) {
+    async formatTarget (img) {
         const info = {};
         const sizes = [];
 
@@ -81,6 +101,21 @@ class ConvertImgs {
         };
 
         return Promise.resolve(target);
+    }
+
+    /**
+     * @private
+     * @param imgColl[] {object}; collection of images
+     * @returns {Promise}
+     */
+    formatEachTarget (imgColl) {
+        const targetsPromisesArr = [];
+
+        imgColl.forEach((imgCur) => {
+            targetsPromisesArr.push(this.formatTarget(imgCur));
+        });
+
+        return Promise.all(targetsPromisesArr);
     }
 
     /**
@@ -133,7 +168,7 @@ class ConvertImgs {
      * @param img.ext {string}
      * @param sizes[] {string}
      */
-    prepareToConvert ({img, sizes} = {}) {
+    convertEachSize ({img, sizes} = {}) {
         return new Promise((resolve, reject) => {
             /**
              * sizes = collection to iterate over,
@@ -204,33 +239,10 @@ class ConvertImgs {
     }
 
     async start () {
-        /**
-         * empty folder before convert.
-         * it's need because of random name for
-         * each new converted image.
-         * so if not empty there will many duplicate
-         */
-        try {
-            await fs.emptyDir(this.imgsDonePath);
-            console.log(`${this.imgsDonePath} is now empty;`);
-        } catch (err) {
-            throw err;
-        }
+        this.emptyImgsDoneDir();
 
-        const imgsList = Dir.readDir({
-            path: this.imgsPath,
-            formats: ['bmp', 'gif', 'jng', 'jp2', 'jpc', 'jpeg', 'jpg', 'png', 'ptif', 'tiff']
-        });
-
-        //todo: раскидать всё, что ниже по методам
-
-        const targetsPromisesArr = [];
-
-        imgsList.forEach((imgCur) => {
-            targetsPromisesArr.push(this.setupTarget(imgCur));
-        });
-
-        const targets = await Promise.all(targetsPromisesArr);
+        const imgColl = this.getImgColl();
+        const targets = await this.formatEachTarget(imgColl);
 
         /**
          * targets = collection to iterate over,
@@ -238,7 +250,7 @@ class ConvertImgs {
          * function (err) = last iteration callback
          */
         eachSeries(targets, (targetCur, next) => {
-            const promise = this.prepareToConvert(targetCur);
+            const promise = this.convertEachSize(targetCur);
             promise.then(() => {
                 next();
             });
