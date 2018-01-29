@@ -19,7 +19,7 @@ class ConvertImgs {
     constructor ({imgsPath, imgsDonePath} = {}) {
         this.imgsPath = imgsPath;
         this.imgsDonePath = imgsDonePath;
-        this.widthArr = [
+        this.allowSizes = [
             640,
             1280,
             1600,
@@ -37,9 +37,9 @@ class ConvertImgs {
      * @param img.fullPath {string}
      * @returns {Promise}
      */
-    async setupTargets (img) {
+    async setupTarget (img) {
         const info = {};
-        const newSize = [];
+        const sizes = [];
 
         info.size = await Img.getInfo(img.fullPath, 'size');
         info.format = await Img.getInfo(img.fullPath, 'format');
@@ -60,7 +60,7 @@ class ConvertImgs {
                 size: info.size
             });
 
-            console.log(`${img.fullPath} is not valid due size;`);
+            console.log(`${img.fullPath} is not valid due ratio;`);
 
             if (tryToSquareResult !== false) {
                 img = tryToSquareResult;
@@ -71,13 +71,13 @@ class ConvertImgs {
 
         const maxWidth = ConvertImgs.getMaxWidth(width);
 
-        this.widthArr.forEach((widthCur) => {
-            if (maxWidth >= widthCur) newSize.push(widthCur);
+        this.allowSizes.forEach((widthCur) => {
+            if (maxWidth >= widthCur) sizes.push(widthCur);
         });
 
         const target = {
             img,
-            size: newSize
+            sizes
         };
 
         return Promise.resolve(target);
@@ -131,12 +131,16 @@ class ConvertImgs {
      * @param img.fullPath {string}
      * @param img.name {string}
      * @param img.ext {string}
-     * @param size[] {string}
+     * @param sizes[] {string}
      */
-    prepareToConvert ({img, size} = {}) {
+    prepareToConvert ({img, sizes} = {}) {
         return new Promise((resolve, reject) => {
-            //todo: попробовать eachLimit вместо eachSeries
-            eachSeries(size, (sizeCur, next) => {
+            /**
+             * targets = collection to iterate over,
+             * function (targetCur, next), next = iteration callback,
+             * function (err) = last iteration callback
+             */
+            eachSeries(sizes, (sizeCur, next) => {
                 const newName = randomString();
                 const imgCurDoneDir = `${this.imgsDonePath}/${sizeCur}`;
                 const newFullName = `${imgCurDoneDir}/${newName}.jpg`;
@@ -223,11 +227,16 @@ class ConvertImgs {
         const targetsPromisesArr = [];
 
         imgsList.forEach((imgCur) => {
-            targetsPromisesArr.push(this.setupTargets(imgCur));
+            targetsPromisesArr.push(this.setupTarget(imgCur));
         });
 
         const targets = await Promise.all(targetsPromisesArr);
 
+        /**
+         * targets = collection to iterate over,
+         * function (targetCur, next), next = iteration callback,
+         * function (err) = last iteration callback
+         */
         eachSeries(targets, (targetCur, next) => {
             const promise = this.prepareToConvert(targetCur);
             promise.then(() => {
