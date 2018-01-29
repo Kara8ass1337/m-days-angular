@@ -9,12 +9,10 @@ export class IndexController {
         this.$interval = $interval;
         this.$http = $http;
 
-        this.dateForPirnt = dateForPrint(new Date());
         this.repeatDate = repeatDate();
         this.progressFull = this.repeatDate.progressFull;
         this.progressShort = this.repeatDate.progressShort;
         this.twoDigitsAlways = twoDigitsAlways;
-        this.bgArr = [];
         this.bg = '';
         this.bgNext = '';
         this.bgStyle = '';
