@@ -136,7 +136,7 @@ class ConvertImgs {
     prepareToConvert ({img, sizes} = {}) {
         return new Promise((resolve, reject) => {
             /**
-             * targets = collection to iterate over,
+             * sizes = collection to iterate over,
              * function (targetCur, next), next = iteration callback,
              * function (err) = last iteration callback
              */
