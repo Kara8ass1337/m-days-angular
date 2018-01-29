@@ -228,17 +228,16 @@ class ConvertImgs {
 
         const targets = await Promise.all(targetsPromisesArr);
 
-        const resultsPromisesArr = [];
+        eachSeries(targets, (targetCur, next) => {
+            const promise = this.prepareToConvert(targetCur);
+            promise.then(() => {
+                next();
+            });
+        }, (err) => {
+            if (err) throw err;
 
-        targets.forEach((targetCur) => {
-            resultsPromisesArr.push(this.prepareToConvert(targetCur));
+            console.log('done');
         });
-
-        await Promise.all(resultsPromisesArr);
-
-        //todo: promises do not correctly, fix it
-
-        console.log('done');
     }
 }
 
