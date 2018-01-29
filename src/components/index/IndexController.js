@@ -21,8 +21,24 @@ export class IndexController {
         this.bgNextStyle = '';
         this.bgChanging = false;
 
+        /**
+         *
+         * temp, for get virtual resolution of smart watch
+         * todo: delete before production
+         */
+        /*const viewPortSize = IndexController.getViewportSize();
+
+        alert(`width: ${viewPortSize.width}, height: ${viewPortSize.height}`);*/
+
         this.init();
         this.bgInit();
+    }
+
+    static getViewportSize () {
+        return {
+            width: window.outerWidth,
+            height: window.outerHeight
+        }
     }
 
     init () {
