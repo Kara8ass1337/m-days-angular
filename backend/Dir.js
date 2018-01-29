@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require('fs-extra');
 const File = require('./File');
 
 class Dir {
@@ -64,7 +64,7 @@ class Dir {
                     if (formatIsOk === true) {
                         allFiles.push(fileInfo);
                     } else {
-                        console.log(`${fileCurFullPath} has wrong format, skip`);
+                        console.log(`${fileCurFullPath} has wrong format, skip;`);
                     }
                 } else if (stats.isDirectory()) {
                     R(fileCurFullPath);
@@ -75,6 +75,21 @@ class Dir {
         R(path);
 
         return allFiles;
+    }
+
+    /**
+     *
+     * @param path {string}
+     * @returns {Promise}
+     */
+    static empty (path) {
+        return fs.emptyDir(path)
+            .then(() => {
+            console.log(`${path} is now empty;`);
+        })
+            .catch((err) => {
+                throw err;
+            });
     }
 }
 

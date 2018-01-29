@@ -1,7 +1,7 @@
 const appRoot = require('app-root-path');
-const fs = require('fs-extra');
 const gm = require('gm');
 const exiftool = require('node-exiftool');
+//const ep = new exiftool.ExiftoolProcess('E:\\Programs\\exiftool\\exiftool(-k).exe');
 const ep = new exiftool.ExiftoolProcess();
 const eachSeries = require('async/eachSeries');
 const Img = require('./Img');
@@ -40,14 +40,8 @@ class ConvertImgs {
      * each new converted image.
      * so if not empty there will be many duplicate
      */
-    async emptyImgsDoneDir () {
-        try {
-            await fs.emptyDir(this.imgsDonePath);
-
-            console.log(`${this.imgsDonePath} is now empty;`);
-        } catch (err) {
-            throw err;
-        }
+    emptyImgsDoneDir () {
+        return Dir.empty(this.imgsDonePath);
     }
 
     /**
@@ -192,6 +186,8 @@ class ConvertImgs {
      * @param sizes[] {string}
      */
     convertTargetEachSize ({img, sizes} = {}) {
+        if (!img) return Promise.resolve();
+
         return new Promise((resolve, reject) => {
             /**
              * sizes = collection to iterate over,
@@ -215,7 +211,7 @@ class ConvertImgs {
             }, (err) => {
                 if (err) throw err;
 
-                console.log(`done with ${img.name}`);
+                console.log(`done with ${img.name};`);
 
                 resolve();
             });
@@ -239,15 +235,16 @@ class ConvertImgs {
                 .write(`${newFullName}`, async (err) => {
                     if (err) throw err;
 
-                    try {
+                    //todo: In Windows not working
+                    /*try {
                         await ConvertImgs.removeMetaData(newFullName);
 
-                        console.log(`meta was removed from ${size}/${newName}.jpg`);
+                        console.log(`meta was removed from ${size}/${newName}.jpg;`);
                     } catch (err) {
                         console.error(err);
-                    }
+                    }*/
 
-                    console.log(`${img.name} converted to ${size}/${newName}.jpg`);
+                    console.log(`${img.name} converted to ${size}/${newName}.jpg;`);
 
                     resolve();
                 });
@@ -274,7 +271,7 @@ class ConvertImgs {
     }
 
     async start () {
-        this.emptyImgsDoneDir();
+        await this.emptyImgsDoneDir();
 
         const images = this.getImages();
         const targets = await this.formatEachTarget(images);
