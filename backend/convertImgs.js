@@ -1,8 +1,9 @@
 const appRoot = require('app-root-path');
 const gm = require('gm');
 const exiftool = require('node-exiftool');
+const exiftoolBin = require('dist-exiftool');
 //const ep = new exiftool.ExiftoolProcess('E:\\Programs\\exiftool\\exiftool(-k).exe');
-const ep = new exiftool.ExiftoolProcess();
+const ep = new exiftool.ExiftoolProcess(exiftoolBin);
 const eachSeries = require('async/eachSeries');
 const Img = require('./Img');
 const Dir = require('./Dir');
@@ -236,13 +237,13 @@ class ConvertImgs {
                     if (err) throw err;
 
                     //todo: In Windows not working
-                    /*try {
+                    try {
                         await ConvertImgs.removeMetaData(newFullName);
 
                         console.log(`meta was removed from ${size}/${newName}.jpg;`);
                     } catch (err) {
                         console.error(err);
-                    }*/
+                    }
 
                     console.log(`${img.name} converted to ${size}/${newName}.jpg;`);
 
