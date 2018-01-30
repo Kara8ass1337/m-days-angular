@@ -2,7 +2,6 @@ const appRoot = require('app-root-path');
 const gm = require('gm');
 const exiftool = require('node-exiftool');
 const exiftoolBin = require('dist-exiftool');
-//const ep = new exiftool.ExiftoolProcess('E:\\Programs\\exiftool\\exiftool(-k).exe');
 const ep = new exiftool.ExiftoolProcess(exiftoolBin);
 const eachSeries = require('async/eachSeries');
 const Img = require('./Img');
@@ -236,7 +235,6 @@ class ConvertImgs {
                 .write(`${newFullName}`, async (err) => {
                     if (err) throw err;
 
-                    //todo: In Windows not working
                     try {
                         await ConvertImgs.removeMetaData(newFullName);
 
