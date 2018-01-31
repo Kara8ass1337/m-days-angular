@@ -72,12 +72,12 @@ class ConvertImgs {
                 size: info.size
             });
 
-            console.log(`${img.fullPath} is not valid due ratio;`);
-
             if (tryToSquareResult !== false) {
                 img = tryToSquareResult;
 
                 console.log(`${img.fullPath} was cropped to square;`);
+            } else {
+                console.log(`${img.fullPath} is not valid due ratio;`);
             }
         }
 
@@ -186,8 +186,6 @@ class ConvertImgs {
      * @param sizes[] {string}
      */
     convertTargetEachSize ({img, sizes} = {}) {
-        if (!img) return Promise.resolve();
-
         return new Promise((resolve, reject) => {
             /**
              * sizes = collection to iterate over,
