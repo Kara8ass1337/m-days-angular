@@ -57,7 +57,9 @@ module.exports = {
             exclude: ['.gitkeep'],
         }),
         extractStyles,
-        new webpack.HotModuleReplacementPlugin(),
+        new webpack.HotModuleReplacementPlugin({
+            multiStep: true
+        }),
         new HtmlWebpackPlugin({
             template: `${rootPath}/src/index.html`
         }),
@@ -114,7 +116,14 @@ module.exports = {
     devServer: {
         host: 'localhost',
         port: '8081',
-        //public: '192.168.1.7:8081',
+        inline: true,
+        hot: true,
+        proxy: {
+            '/' : {
+                target: 'http://localhost:8000',
+                secure: false
+            }
+        },
         contentBase: resolve(__dirname, '../public'),
         publicPath: '/',
         historyApiFallback: {
