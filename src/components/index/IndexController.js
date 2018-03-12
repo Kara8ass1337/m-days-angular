@@ -1,6 +1,5 @@
-import {dateForPrint} from 'common/helpers/dateForPrint';
-import {repeatDate} from 'common/helpers/repeatDate';
-import {twoDigitsAlways} from 'common/helpers/twoDigitsAlways';
+import {repeatDate} from './repeatDate';
+import {twoDigitsAlways} from './twoDigitsAlways';
 
 export class IndexController {
     constructor ($scope, $timeout, $interval, $http) {
