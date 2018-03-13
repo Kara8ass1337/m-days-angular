@@ -1,4 +1,4 @@
-export class sendUsController {
+export class PopupSendUsController {
     constructor($scope, $http, activePopupElem) {
         this.activePopupElem = activePopupElem;
         this.$http = $http;

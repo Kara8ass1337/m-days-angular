@@ -1,4 +1,4 @@
-export class DonateController {
+export class PopupDonateController {
     constructor ($scope, activePopupElem, donateInstructionState) {
         this.activePopupElem = activePopupElem;
         this.donateInstructionState = donateInstructionState;
