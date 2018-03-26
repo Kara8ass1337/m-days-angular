@@ -1,3 +1,4 @@
+const localVars = require('../src/getLocalVars')();
 const webpack = require('webpack');
 const resolve = require('path').resolve;
 
@@ -7,6 +8,11 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const argv = require('yargs').argv;
+const rootPath = resolve(__dirname, '../');
+
+if (!localVars.serverHost) {
+    console.warn('Warning: Server host does not specified!');
+}
 
 const extractStyles = new ExtractTextPlugin({
     filename: '[name].css',
@@ -40,8 +46,6 @@ const stylesLoadersChunk = ({test, loader, options} = {}) => {
     }
 };
 
-const rootPath = resolve(__dirname, '../');
-
 module.exports = {
     devtool: 'source-map',
     entry: {
@@ -72,7 +76,7 @@ module.exports = {
             }]
         }]),
         new OpenBrowserPlugin({
-            url: 'http://localhost:8081'
+            url: localVars.webpackUrl || 'http://localhost:3001'
         })
     ],
     context: rootPath,
@@ -114,13 +118,13 @@ module.exports = {
             }]
     },
     devServer: {
-        host: 'localhost',
-        port: '8081',
+        host: localVars.webpackHost || 'localhost',
+        port: localVars.webpackPort || '3001',
         inline: true,
         hot: true,
         proxy: {
             '/' : {
-                target: 'http://localhost:8000',
+                target: localVars.serverUrl || 'http://localhost:3000',
                 secure: false
             }
         },
