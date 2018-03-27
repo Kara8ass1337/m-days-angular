@@ -55,10 +55,13 @@ export class IndexController {
         else if (width >= 3840 && width < 5210) return 3840;
         else if (width >= 5210 && width < 7680) return 5210;
         else if (width >= 7680) return 7680;
+        else return 1920;
     }
 
     async bgInit () {
         const screenWidth = IndexController.getMaxWidth(window.outerWidth);
+        //todo: if height > width, getMaxWidth(height);
+        //todo: initialScale=1.0;
 
         function getData () {
             return this.$http.get(`${window.location.origin}/bg`, {
