@@ -1,8 +1,7 @@
 # m-days-angular
 just learning angular 1.x, take no notice
 
-It's here now: 
-[http://185.242.179.166](http://185.242.179.166)
+http://m-days.ru
 
 # How to install
 
