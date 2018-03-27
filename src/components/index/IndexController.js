@@ -46,6 +46,11 @@ export class IndexController {
         }, 100);
     }
 
+    /**
+     *
+     * @param width {number}
+     * @returns {number}
+     */
     static getMaxWidth(width) {
         if (width >= 640 && width < 1280) return 640;
         else if (width >= 1280 && width < 1600) return 1280;
@@ -58,10 +63,13 @@ export class IndexController {
         else return 1920;
     }
 
+    static getMaxSide() {
+        return Math.max(window.outerHeight, window.innerHeight, window.outerWidth, window.innerWidth);
+    }
+
     async bgInit () {
-        const screenWidth = IndexController.getMaxWidth(window.outerWidth);
-        //todo: if height > width, getMaxWidth(height);
-        //todo: initialScale=1.0;
+        const maxSide = IndexController.getMaxSide();
+        const screenWidth = IndexController.getMaxWidth(maxSide);
 
         function getData () {
             return this.$http.get(`${window.location.origin}/bg`, {
