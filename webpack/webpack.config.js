@@ -1,4 +1,4 @@
-const localVars = require('../src/getLocalVars')();
+const GLOBALS = require('../src/getGlobals')();
 const webpack = require('webpack');
 const resolve = require('path').resolve;
 
@@ -10,7 +10,7 @@ const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const argv = require('yargs').argv;
 const rootPath = resolve(__dirname, '../');
 
-if (!localVars.serverHost) {
+if (!GLOBALS.serverHost) {
     console.warn('Warning: Server host does not specified!');
 }
 
@@ -76,7 +76,7 @@ module.exports = {
             }]
         }]),
         new OpenBrowserPlugin({
-            url: localVars.webpackUrl || 'http://localhost:3001'
+            url: GLOBALS.webpackUrl
         })
     ],
     context: rootPath,
@@ -118,13 +118,13 @@ module.exports = {
             }]
     },
     devServer: {
-        host: localVars.webpackHost || 'localhost',
-        port: localVars.webpackPort || '3001',
+        host: GLOBALS.webpackHost,
+        port: GLOBALS.webpackPort,
         inline: true,
         hot: true,
         proxy: {
             '/' : {
-                target: localVars.serverUrl || 'http://localhost:3000',
+                target: GLOBALS.serverUrl,
                 secure: false
             }
         },
