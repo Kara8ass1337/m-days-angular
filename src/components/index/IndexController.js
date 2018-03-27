@@ -52,7 +52,8 @@ export class IndexController {
      * @returns {number}
      */
     static getMaxWidth(width) {
-        if (width >= 640 && width < 1280) return 640;
+        if (width < 640) return 640;
+        else if (width >= 640 && width < 1280) return 640;
         else if (width >= 1280 && width < 1600) return 1280;
         else if (width >= 1600 && width < 1920) return 1600;
         else if (width >= 1920 && width < 2560) return 1920;
