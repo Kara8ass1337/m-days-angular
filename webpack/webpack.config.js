@@ -1,4 +1,4 @@
-const GLOBALS = require('../src/getGlobals')();
+const GLOBALS = require('dot-globals')();
 const webpack = require('webpack');
 const resolve = require('path').resolve;
 
