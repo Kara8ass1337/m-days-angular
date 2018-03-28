@@ -57,13 +57,6 @@ export class AboutController {
                 name: 'Dmitriy',
                 surname: 'Koldyaev'
             },
-            //Роман Берёзин
-            {
-                href: 'https://vk.com/landschaften',
-                img: '/img/about/roman_berezin.jpg',
-                name: 'Roman',
-                surname: 'Berezin'
-            },
             //Виктория Чешко
             {
                 href: 'https://vk.com/id131625031',
