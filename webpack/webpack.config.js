@@ -62,7 +62,7 @@ module.exports = {
         }),
         extractStyles,
         new webpack.HotModuleReplacementPlugin({
-            multiStep: true
+            multiStep: false
         }),
         new HtmlWebpackPlugin({
             template: `${rootPath}/src/index.html`
