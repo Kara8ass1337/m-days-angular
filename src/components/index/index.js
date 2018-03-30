@@ -5,6 +5,6 @@ import {IndexController} from './IndexController';
 
 app.component('index', {
     template,
-    controller: ['$scope', '$timeout', '$interval', '$http', IndexController],
+    controller: ['$scope', '$timeout', '$interval', '$http', 'popupActiveState', IndexController],
     controllerAs: 'vm'
 });

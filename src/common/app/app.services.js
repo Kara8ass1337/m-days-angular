@@ -1,35 +1,14 @@
 import {app} from './app.init';
 
-class DonateInstructionState {
-    constructor () {
-        this.donateInstructionState = false;
-    }
-
-    set (state) {
-        this.donateInstructionState = state;
-    };
-
-    get () {
-        return this.donateInstructionState;
-    }
-}
-
-app.factory('donateInstructionState', () => {
-    return new DonateInstructionState();
-});
-
 class ActivePopupElem {
-    constructor (donateInstructionState) {
+    constructor ($rootScope) {
         this.activePopupElem = 'menu';
-        this.donateInstructionState = donateInstructionState;
+        this.$rootScope = $rootScope;
     }
 
     set (elem) {
         this.activePopupElem = elem;
-
-        if (this.donateInstructionState.get() === true && this.activePopupElem !== 'donate') {
-            this.donateInstructionState.set(false);
-        }
+        this.$rootScope.$broadcast('popupActiveElemChange', this.activePopupElem);
     };
 
     get () {
@@ -37,31 +16,20 @@ class ActivePopupElem {
     }
 }
 
-app.factory('activePopupElem', ['donateInstructionState', (donateInstructionState) => {
-    return new ActivePopupElem(donateInstructionState);
+app.factory('activePopupElem', ['$rootScope', ($rootScope) => {
+    return new ActivePopupElem($rootScope);
 }]);
 
 class PopupActiveState {
-    constructor (donateInstructionState) {
-        this.donateInstructionState = donateInstructionState;
+    constructor ($rootScope) {
+        this.$rootScope = $rootScope;
         this.popupActiveState = false;
     }
 
     set (state) {
         this.popupActiveState = state;
 
-        const body = document.getElementsByTagName('body')[0];
-        //todo: wrap all to another one wrapper with width 100% and height 100vh
-
-        if (this.popupActiveState === true) {
-            body.classList.add('popup-active');
-        } else {
-            body.classList.remove('popup-active');
-
-            if (this.donateInstructionState.get() === true) {
-                this.donateInstructionState.set(false);
-            }
-        }
+        this.$rootScope.$broadcast('popupStateChange', this.popupActiveState);
     };
 
     get () {
@@ -69,6 +37,6 @@ class PopupActiveState {
     }
 }
 
-app.factory('popupActiveState', ['donateInstructionState', (donateInstructionState) => {
-    return new PopupActiveState(donateInstructionState);
+app.factory('popupActiveState', ['$rootScope', ($rootScope) => {
+    return new PopupActiveState($rootScope);
 }]);
