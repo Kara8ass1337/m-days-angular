@@ -5,6 +5,6 @@ import {PopupDonateController} from './PopupDonateController';
 
 app.component('popupDonate', {
     template,
-    controller: ['$scope', 'activePopupElem', PopupDonateController],
+    controller: ['$scope', 'popupActiveElem', PopupDonateController],
     controllerAs: 'vm'
 });

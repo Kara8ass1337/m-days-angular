@@ -1,6 +1,6 @@
 export class AboutController {
-    constructor ($scope, popupActiveState) {
-        this.popupActiveState = popupActiveState;
+    constructor ($scope, popupState) {
+        this.popupState = popupState;
         this.data = [
             //Александр Калугин
             {

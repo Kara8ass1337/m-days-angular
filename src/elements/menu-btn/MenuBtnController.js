@@ -1,16 +1,16 @@
 export class MenuBtnController {
-    constructor ($scope, activePopupElem, popupActiveState) {
+    constructor ($scope, popupActiveElem, popupState) {
         this.isActive = false;
-        this.popupActiveState = popupActiveState;
-        this.activePopupElem = activePopupElem;
+        this.popupState = popupState;
+        this.popupActiveElem = popupActiveElem;
     }
 
     toggleState () {
         this.isActive = !this.isActive;
-        this.popupActiveState.set(this.isActive);
+        this.popupState.set(this.isActive);
 
         if (this.isActive === false) {
-            this.activePopupElem.set('menu');
+            this.popupActiveElem.set('menu');
         }
     }
 }

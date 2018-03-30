@@ -5,6 +5,6 @@ import {PopupMenuController} from './PopupMenuController';
 
 app.component('popupMenu', {
     template,
-    controller: ['$scope', '$location', 'activePopupElem', PopupMenuController],
+    controller: ['$scope', '$location', 'popupActiveElem', PopupMenuController],
     controllerAs: 'vm'
 });

@@ -5,6 +5,6 @@ import {AboutController} from './AboutController';
 
 app.component('about', {
     template,
-    controller: ['$scope', 'popupActiveState', AboutController],
+    controller: ['$scope', 'popupState', AboutController],
     controllerAs: 'vm'
 });

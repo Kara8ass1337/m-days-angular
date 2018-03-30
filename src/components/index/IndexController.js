@@ -7,7 +7,7 @@ export class IndexController {
         this.$timeout = $timeout;
         this.$interval = $interval;
         this.$http = $http;
-        this.popupActiveState = popupActiveState;
+        this.popupState = popupActiveState;
 
         this.repeatDate = repeatDate();
         this.progressFull = this.repeatDate.progressFull;

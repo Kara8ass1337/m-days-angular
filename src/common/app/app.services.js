@@ -1,42 +1,42 @@
 import {app} from './app.init';
 
-class ActivePopupElem {
+class PopupActiveElem {
     constructor ($rootScope) {
-        this.activePopupElem = 'menu';
+        this.popupActiveElem = 'menu';
         this.$rootScope = $rootScope;
     }
 
     set (elem) {
-        this.activePopupElem = elem;
-        this.$rootScope.$broadcast('popupActiveElemChange', this.activePopupElem);
+        this.popupActiveElem = elem;
+        this.$rootScope.$broadcast('popupActiveElemChange', this.popupActiveElem);
     };
 
     get () {
-        return this.activePopupElem;
+        return this.popupActiveElem;
     }
 }
 
-app.factory('activePopupElem', ['$rootScope', ($rootScope) => {
-    return new ActivePopupElem($rootScope);
+app.factory('popupActiveElem', ['$rootScope', ($rootScope) => {
+    return new PopupActiveElem($rootScope);
 }]);
 
-class PopupActiveState {
+class PopupState {
     constructor ($rootScope) {
         this.$rootScope = $rootScope;
-        this.popupActiveState = false;
+        this.popupState = false;
     }
 
     set (state) {
-        this.popupActiveState = state;
+        this.popupState = state;
 
-        this.$rootScope.$broadcast('popupStateChange', this.popupActiveState);
+        this.$rootScope.$broadcast('popupStateChange', this.popupState);
     };
 
     get () {
-        return this.popupActiveState;
+        return this.popupState;
     }
 }
 
-app.factory('popupActiveState', ['$rootScope', ($rootScope) => {
-    return new PopupActiveState($rootScope);
+app.factory('popupState', ['$rootScope', ($rootScope) => {
+    return new PopupState($rootScope);
 }]);

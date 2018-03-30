@@ -5,6 +5,6 @@ import {PopupSendUsController} from './PopupSendUsController';
 
 app.component('popupSendUs', {
     template,
-    controller: ['$scope', '$http', 'activePopupElem', PopupSendUsController],
+    controller: ['$scope', '$http', 'popupActiveElem', PopupSendUsController],
     controllerAs: 'vm'
 });
