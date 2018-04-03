@@ -1,48 +1,50 @@
-<menu-btn></menu-btn>
-<popup></popup>
-<div class="about">
+<div class="main-wrapper" ng-class="{'popup-active': vm.popupState.get() === true}">
+  <menu-btn></menu-btn>
+  <popup></popup>
+  <div class="about">
     <div class="about__title">Project Owners</div>
     <div class="about__members-wrapper">
-        <!-- Олег Шилов -->
-        <div class="about__member">
-            <a href="https://vk.com/id15927588" target=_blank>
-                <img class="about__member__img" src="/img/about/shilov.jpg" />
-            </a>
-            <div class="about__member__name">
-                <a href="https://vk.com/id15927588" target=_blank>
-                    Oleg
-                    <br />
-                    Shilov
-                </a>
-            </div>
+      <!-- Олег Шилов -->
+      <div class="about__member">
+        <a href="https://vk.com/id15927588" target=_blank>
+          <img class="about__member__img" src="/img/about/shilov.jpg" />
+        </a>
+        <div class="about__member__name">
+          <a href="https://vk.com/id15927588" target=_blank>
+            Oleg
+            <br />
+            Shilov
+          </a>
         </div>
-        <!-- Гордей Переходов -->
-        <div class="about__member">
-            <a href="https://vk.com/likilo" target=_blank>
-                <img class="about__member__img" src="/img/about/perekhodov.jpg" />
-            </a>
-            <div class="about__member__name">
-                <a href="https://vk.com/likilo" target=_blank>
-                    Gordey
-                    <br />
-                    Perekhodov
-                </a>
-            </div>
+      </div>
+      <!-- Гордей Переходов -->
+      <div class="about__member">
+        <a href="https://vk.com/likilo" target=_blank>
+          <img class="about__member__img" src="/img/about/perekhodov.jpg" />
+        </a>
+        <div class="about__member__name">
+          <a href="https://vk.com/likilo" target=_blank>
+            Gordey
+            <br />
+            Perekhodov
+          </a>
         </div>
+      </div>
     </div>
     <div class="about__title">Project Members</div>
     <div class="about__members-wrapper">
-        <div class="about__member" ng-repeat="member in vm.data track by $index">
-            <a ng-href="{{member.href}}" target=_blank>
-                <img class="about__member__img" ng-src="{{member.img}}" />
-            </a>
-            <div class="about__member__name">
-                <a href="{{member.href}}" target=_blank>
-                    <span>{{member.name}}</span>
-                    <br />
-                    <span>{{member.surname}}</span>
-                </a>
-            </div>
+      <div class="about__member" ng-repeat="member in vm.data track by $index">
+        <a ng-href="{{member.href}}" target=_blank>
+          <img class="about__member__img" ng-src="{{member.img}}" />
+        </a>
+        <div class="about__member__name">
+          <a href="{{member.href}}" target=_blank>
+            <span>{{member.name}}</span>
+            <br />
+            <span>{{member.surname}}</span>
+          </a>
         </div>
+      </div>
     </div>
+  </div>
 </div>

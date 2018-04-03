@@ -1,10 +1,27 @@
 export class PopupDonateController {
-    constructor ($scope, activePopupElem, donateInstructionState) {
-        this.activePopupElem = activePopupElem;
-        this.donateInstructionState = donateInstructionState;
+    constructor ($scope, popupActiveElem) {
+        this.$scope = $scope;
+        this.popupActiveElem = popupActiveElem;
+        this.donateInstructionState = false;
+
+        this.events();
     }
 
     toggleInstructionState () {
-        this.donateInstructionState.set(!this.donateInstructionState.get());
+        this.donateInstructionState = !this.donateInstructionState;
+    }
+
+    events() {
+        this.$scope.$on('popupStateChange', (event, current, prev) => {
+            if (current === false) {
+                this.donateInstructionState = false;
+            }
+        });
+
+        this.$scope.$on('popupActiveElemChange', (event, current, prev) => {
+            if (current !== 'donate') {
+                this.donateInstructionState = false;
+            }
+        });
     }
 }

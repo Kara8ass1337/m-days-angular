@@ -1,5 +1,5 @@
-import './menu-btn/menu-btn';
+import './menu-btn/menuBtn';
 import './popup/popup';
-import './popup-menu/popup-menu';
-import './popup-send-to-us/popup-send-us';
-import './popup-donate/popup-donate';
+import './popup-menu/popupMenu';
+import './popup-send-to-us/popupSendUs';
+import './popup-donate/popupDonate';

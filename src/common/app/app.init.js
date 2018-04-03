@@ -7,11 +7,29 @@ export const app = angular.module('app', [
     ngAnimate
 ]);
 
-app.run(($rootScope, popupActiveState) => {
+app.run(($rootScope, $location, $state, popupState) => {
+    /**
+     * переадресуем, если есть параметр route
+     */
+    const route = $location.$$search.route;
+
+    const allowRoutes = [
+        'index',
+        'about'
+    ];
+
+    if (route) {
+        if (allowRoutes.indexOf(route) !== -1) {
+            $state.go(route);
+        } else {
+            $state.go('index'); //todo: 404
+        }
+    }
+
     /**
      * навешиваем событие изменения состояния UI Router-а
      */
     $rootScope.$on('$stateChangeStart', (event, next, current) => {
-        popupActiveState.set(false);
+        popupState.set(false);
     });
 });

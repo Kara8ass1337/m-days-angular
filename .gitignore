@@ -6,7 +6,8 @@ gen
 
 node_modules/
 build/
-stats.json
 *.local.*
+stats.json
+.globals.js
 *.env
 design/

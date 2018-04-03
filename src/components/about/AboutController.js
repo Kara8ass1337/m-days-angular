@@ -1,5 +1,6 @@
 export class AboutController {
-    constructor () {
+    constructor ($scope, popupState) {
+        this.popupState = popupState;
         this.data = [
             //Александр Калугин
             {
@@ -56,13 +57,6 @@ export class AboutController {
                 img: '/img/about/dmitriy_koldyaev.jpg',
                 name: 'Dmitriy',
                 surname: 'Koldyaev'
-            },
-            //Роман Берёзин
-            {
-                href: 'https://vk.com/landschaften',
-                img: '/img/about/roman_berezin.jpg',
-                name: 'Roman',
-                surname: 'Berezin'
             },
             //Виктория Чешко
             {

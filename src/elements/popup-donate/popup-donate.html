@@ -1,4 +1,4 @@
-<div class="donate fade" ng-if="vm.activePopupElem.get() === 'donate'">
+<div class="donate fade" ng-if="vm.popupActiveElem.get() === 'donate'">
     <div class="popup__logo">
         <img src="/img/logo.png" />
     </div>
@@ -28,10 +28,10 @@
                     </form>
                 </div>
             </div>
-            <div class="pay-item" ng-class="{'instruction-is-active': vm.donateInstructionState.get() === true}"
+            <div class="pay-item" ng-class="{'instruction-is-active': vm.donateInstructionState}"
                  ng-click="vm.toggleInstructionState();">
-                <div class="pay-item__btn fade qiwi" ng-if="vm.donateInstructionState.get() === false"></div>
-                <div class="pay-item__instruction fade" ng-if="vm.donateInstructionState.get() === true"
+                <div class="pay-item__btn fade qiwi" ng-if="!vm.donateInstructionState"></div>
+                <div class="pay-item__instruction fade" ng-if="vm.donateInstructionState"
                      ng-click="$event.stopPropagation();">
                     Go to <a href="https://visa.qiwi.ru/transfer/form.action" target="_blank">link.</a>
                     <br />
@@ -55,6 +55,6 @@
         </div>
     </div>
     <div class="popup__go-back">
-        <a ng-click="vm.activePopupElem.set('menu')">Go back</a>
+        <a ng-click="vm.popupActiveElem.set('menu')">Go back</a>
     </div>
 </div>

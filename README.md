@@ -1,10 +1,12 @@
 # m-days-angular
 just learning angular 1.x, take no notice
 
+http://m-days.ru
+
 # How to install
 
-First of all create file with local variables 
-(by default ${root}/.local.js)
+First of all create file with global variables 
+(by default ${root}/.globals.js)
 and set them.
 
 You need to specify 

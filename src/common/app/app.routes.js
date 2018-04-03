@@ -1,13 +1,13 @@
 import {app} from './app.init';
 
-app.config(['$stateProvider', '$urlRouterProvider',
-    function ($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.when('/', '/index');
+app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
+    function ($locationProvider, $stateProvider, $urlRouterProvider) {
+        $locationProvider.html5Mode(true);
         $urlRouterProvider.otherwise('/');
 
         $stateProvider.state('index', {
             name: 'index',
-            url: '/index',
+            url: '/',
             template: '<index></index>'
         });
 

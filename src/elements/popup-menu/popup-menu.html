@@ -1,4 +1,4 @@
-<div class="menu fade" ng-if="vm.activePopupElem.get() === 'menu'">
+<div class="menu fade" ng-if="vm.popupActiveElem.get() === 'menu'">
     <div class="popup__logo">
         <img src="/img/logo.png">
     </div>
@@ -14,8 +14,8 @@
             accompanied with best author's photos.
         </div>
         <div class="popup__item">
-            <a ng-if="vm.$location.path() !== '/about'" ng-href="#!/about">More about us</a>
-            <a ng-if="vm.$location.path() === '/about'" ng-href="#/">Go to main</a>
+            <a ng-if="vm.$location.path() !== '/about'" ng-href="/about">More about us</a>
+            <a ng-if="vm.$location.path() === '/about'" ng-href="/">Go to main</a>
         </div>
         <div class="popup__item">
             Send us your works to <a href="mailto:m-days@m-days.ru">m-days@m-days.ru</a>
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="popup__item">
-            <a ng-click="vm.activePopupElem.set('donate')">Donate</a>
+            <a ng-click="vm.popupActiveElem.set('donate')">Donate</a>
         </div>
     </div>
 </div>

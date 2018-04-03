@@ -1,45 +1,47 @@
-<menu-btn></menu-btn>
-<popup></popup>
-<div class="progress-indicator">
+<div class="main-wrapper" ng-class="{'popup-active': vm.popupState.get() === true}">
+  <menu-btn></menu-btn>
+  <popup></popup>
+  <div class="progress-indicator">
     <div class="progress-indicator__shadow">
-        <div class="progress-indicator__wrapper">
-            <div class="progress-indicator__left">
-                <div class="progress-indicator__year">
-                    <span>{{vm.repeatDate.year}}</span>
-                </div>
-                <div class="progress-indicator__month">
-                    <span>{{vm.repeatDate.day}} {{vm.repeatDate.monthText}}</span>
-                </div>
-            </div>
-            <div class="progress-indicator__center">
-                <div class="progress-indicator__time">
+      <div class="progress-indicator__wrapper">
+        <div class="progress-indicator__left">
+          <div class="progress-indicator__year">
+            <span>{{vm.repeatDate.year}}</span>
+          </div>
+          <div class="progress-indicator__month">
+            <span>{{vm.repeatDate.day}} {{vm.repeatDate.monthText}}</span>
+          </div>
+        </div>
+        <div class="progress-indicator__center">
+          <div class="progress-indicator__time">
                 <span class="progress-indicator__time__hours">
                     {{vm.twoDigitsAlways(vm.repeatDate.hours)}}:</span>
-                    <span class="progress-indicator__time__minutes">
+            <span class="progress-indicator__time__minutes">
                     {{vm.twoDigitsAlways(vm.repeatDate.minutes)}}</span>
-                    <span class="progress-indicator__time__seconds">
+            <span class="progress-indicator__time__seconds">
                     {{vm.twoDigitsAlways(vm.repeatDate.seconds)}}</span>
-                </div>
-                <div class="progress-indicator__progress-bar">
-                    <div class="progress-indicator__progress-bar__bg"></div>
-                    <div class="progress-indicator__progress-bar__walking"
-                         style="width: {{vm.progress}}%">
-                    </div>
-                </div>
-                <div class="progress-indicator__day">
-                    {{vm.repeatDate.dayCount}} of {{vm.repeatDate.daysInYear}} monochrome&nbsp;days
-                </div>
+          </div>
+          <div class="progress-indicator__progress-bar">
+            <div class="progress-indicator__progress-bar__bg"></div>
+            <div class="progress-indicator__progress-bar__walking"
+                 style="width: {{vm.progressFull}}%">
             </div>
-            <div class="progress-indicator__right">
-                <div class="progress-indicator__percent">
-                    <span>{{vm.progressShort}} %</span>
-                </div>
-                <div class="progress-indicator__percent-full">
-                    <span>{{vm.progressFull}} %</span>
-                </div>
-            </div>
+          </div>
+          <div class="progress-indicator__day">
+            {{vm.repeatDate.dayCount}} of {{vm.repeatDate.daysInYear}} monochrome&nbsp;days
+          </div>
         </div>
+        <div class="progress-indicator__right">
+          <div class="progress-indicator__percent">
+            <span>{{vm.progressShort}} %</span>
+          </div>
+          <div class="progress-indicator__percent-full">
+            <span>{{vm.progressFull}} %</span>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="bg" ng-class="{'changing': vm.bgChanging === true}" ng-style="vm.bgStyle"></div>
+  <div class="next-bg" ng-style="vm.bgNextStyle"></div>
 </div>
-<div class="bg" ng-class="{'changing': vm.bgChanging === true}" ng-style="vm.bgStyle"></div>
-<div class="next-bg" ng-style="vm.bgNextStyle"></div>

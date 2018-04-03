@@ -1,4 +1,4 @@
-<div class="send-us fade" ng-if="vm.activePopupElem.get() === 'sendUs'">
+<div class="send-us fade" ng-if="vm.popupActiveElem.get() === 'sendUs'">
     <div class="send-us__title">Send us your works</div>
     <form class="send-us__form feedback-form" ng-submit="vm.submit()">
         <div class="send-us__form__line">
@@ -21,6 +21,6 @@
         <input value="Send" type="submit" />
     </form>
     <div class="popup__go-back">
-        <a ng-click="vm.activePopupElem.set('menu')">Go back</a>
+        <a ng-click="vm.popupActiveElem.set('menu')">Go back</a>
     </div>
 </div>

@@ -2,11 +2,12 @@ import {repeatDate} from './repeatDate';
 import {twoDigitsAlways} from './twoDigitsAlways';
 
 export class IndexController {
-    constructor ($scope, $timeout, $interval, $http) {
+    constructor ($scope, $timeout, $interval, $http, popupActiveState) {
         this.$scope = $scope;
         this.$timeout = $timeout;
         this.$interval = $interval;
         this.$http = $http;
+        this.popupState = popupActiveState;
 
         this.repeatDate = repeatDate();
         this.progressFull = this.repeatDate.progressFull;
@@ -18,24 +19,8 @@ export class IndexController {
         this.bgNextStyle = '';
         this.bgChanging = false;
 
-        /**
-         *
-         * temp, for get virtual resolution of smart watch
-         * todo: delete before production
-         */
-        /*const viewPortSize = IndexController.getViewportSize();
-
-        alert(`width: ${viewPortSize.width}, height: ${viewPortSize.height}`);*/
-
         this.init();
         this.bgInit();
-    }
-
-    static getViewportSize () {
-        return {
-            width: window.outerWidth,
-            height: window.outerHeight
-        }
     }
 
     init () {
@@ -46,8 +31,14 @@ export class IndexController {
         }, 100);
     }
 
+    /**
+     *
+     * @param width {number}
+     * @returns {number}
+     */
     static getMaxWidth(width) {
-        if (width >= 640 && width < 1280) return 640;
+        if (width < 640) return 640;
+        else if (width >= 640 && width < 1280) return 640;
         else if (width >= 1280 && width < 1600) return 1280;
         else if (width >= 1600 && width < 1920) return 1600;
         else if (width >= 1920 && width < 2560) return 1920;
@@ -55,10 +46,16 @@ export class IndexController {
         else if (width >= 3840 && width < 5210) return 3840;
         else if (width >= 5210 && width < 7680) return 5210;
         else if (width >= 7680) return 7680;
+        else return 1920;
+    }
+
+    static getMaxSide() {
+        return Math.max(window.outerHeight, window.innerHeight, window.outerWidth, window.innerWidth);
     }
 
     async bgInit () {
-        const screenWidth = IndexController.getMaxWidth(window.outerWidth);
+        const maxSide = IndexController.getMaxSide();
+        const screenWidth = IndexController.getMaxWidth(maxSide);
 
         function getData () {
             return this.$http.get(`${window.location.origin}/bg`, {
