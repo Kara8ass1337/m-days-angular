@@ -53,14 +53,28 @@ export class IndexController {
         return Math.max(window.outerHeight, window.innerHeight, window.outerWidth, window.innerWidth);
     }
 
+    static isRetina() {
+        if (window.matchMedia) {
+            const mq = window.matchMedia('only screen and (min--moz-device-pixel-ratio: 1.3), ' +
+                'only screen and (-o-min-device-pixel-ratio: 2.6/2), ' +
+                'only screen and (-webkit-min-device-pixel-ratio: 1.3), ' +
+                'only screen  and (min-device-pixel-ratio: 1.3), ' +
+                'only screen and (min-resolution: 1.3dppx)');
+            return (mq && mq.matches || (window.devicePixelRatio > 1));
+        }
+
+        return false;
+    }
+
     async bgInit () {
         const maxSide = IndexController.getMaxSide();
         const screenWidth = IndexController.getMaxWidth(maxSide);
+        const isRetina = IndexController.isRetina();
 
         function getData () {
             return this.$http.get(`${window.location.origin}/bg`, {
                 params: {
-                    screenWidth
+                    screenWidth: isRetina === true ? screenWidth * 2 : screenWidth
                 }
             });
         }
